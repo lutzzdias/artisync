@@ -1,13 +1,15 @@
 import './globals.css'
+import React from 'react'
+// eslint-disable-next-line camelcase
 import { Source_Sans_Pro, Montserrat } from 'next/font/google'
 
 import { Header } from '@/components/Header'
 
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
- })
- 
+})
+
 const sourceSansPro = Source_Sans_Pro({
   weight: ['300', '400', '600', '700'],
   subsets: ['latin'],
@@ -26,7 +28,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sourceSansPro.className} ${montserrat.className} bg-white-500`}>
+      <body
+        className={`${sourceSansPro.className} ${montserrat.className} bg-white-500 px-16 py-6`}
+      >
         <Header />
         {children}
       </body>

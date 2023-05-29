@@ -1,4 +1,4 @@
-export default function Home() {
+export function Header() {
   return (
     <h1>Hello World</h1>
   )

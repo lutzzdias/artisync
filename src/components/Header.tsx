@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { Plus, Search } from 'lucide-react'
+import Image from 'next/image'
 
 import logo from '@/assets/logo.svg'
 
@@ -18,7 +18,7 @@ export function Header() {
         <section role="search">
           <form action="#" method="get" className="w-80">
             <div className="flex items-center gap-2 rounded-xl border border-solid border-gray-300 px-4">
-              <Search size={24} />
+              <Search className="text-gray-300" size={24} />
               <input
                 className="w-full bg-transparent py-3 focus:outline-none"
                 type="search"

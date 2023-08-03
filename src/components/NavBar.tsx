@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import logo from '@/assets/logo.svg'
 
-export function Header() {
+export function NavBar() {
   return (
     <header className="mb-6 flex flex-row items-center justify-between">
       {/* logo */}

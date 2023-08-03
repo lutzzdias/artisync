@@ -3,7 +3,7 @@ import React from 'react'
 // eslint-disable-next-line camelcase
 import { Source_Sans_Pro, Montserrat } from 'next/font/google'
 
-import { Header } from '@/components/Header'
+import { NavBar } from '@/components/NavBar'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${sourceSansPro.className} ${montserrat.className} bg-white-500 px-16 py-6`}
       >
-        <Header />
+        <NavBar />
         {children}
       </body>
     </html>

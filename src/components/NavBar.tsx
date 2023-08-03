@@ -17,7 +17,7 @@ export function NavBar() {
         {/* search area */}
         <section role="search">
           <form action="#" method="get" className="w-80">
-            <div className="flex items-center gap-2 rounded-xl border border-solid border-gray-300 px-4">
+            <div className="flex items-center gap-2 rounded-full border border-solid border-gray-300 px-4">
               <Search className="text-gray-300" size={24} />
               <input
                 className="w-full bg-transparent py-3 focus:outline-none"

@@ -1,7 +1,8 @@
-import { Plus, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import Image from 'next/image'
 
 import logo from '@/assets/logo.svg'
+import ArticleButton from './ArticleButton'
 
 export function NavBar() {
   return (
@@ -29,10 +30,7 @@ export function NavBar() {
           </form>
         </section>
         {/* create article button */}
-        <button className="flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3 text-white-500">
-          <Plus size={24} />
-          Create article
-        </button>
+        <ArticleButton/>
       </div>
     </header>
   )

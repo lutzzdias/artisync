@@ -21,7 +21,7 @@ export default function ArticleButton() {
                 Create article
             </button>
             {showModal? (
-                <ArticleModal showModal={showModal}/>
+                <ArticleModal showModal={setShowModal}/>
             ) 
             : null}
         </>

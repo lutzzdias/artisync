@@ -3,21 +3,18 @@
 import { useState } from "react";
 
 interface ArticleModalProps {
-    showModal: boolean;
+    showModal: any;
 }
 
 export default function ArticleModal({ showModal } : ArticleModalProps) {
 
-    const [isVisible, setIsVisible] = useState(showModal);
-
     const closeModal = () => {
-        setIsVisible(!showModal);
-        console.log(!showModal)
+        showModal(false);
     }
 
     return (
         <>
-        {isVisible? ( 
+        {showModal? ( 
             <>
                 <div className="absolute w-full h-full top-0 left-0 flex items-center justify-center bg-black bg-opacity-10">        
                     <div className="bg-white-400 shadow-xl p-6 rounded-lg">

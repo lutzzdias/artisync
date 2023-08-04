@@ -13,17 +13,16 @@ export function ArticleModal({ showModal }: ArticleModalProps) {
     <>
       {showModal ? (
         <>
+          {/* darken background */}
           <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black bg-opacity-10">
+            {/* modal box */}
             <div className="rounded-lg bg-white-400 p-6 shadow-xl">
-              <div className="flex-wrap items-start">
+              {/* modal box info area */}
+              <div className="flex-wrap items-start text-gray-200">
+                {/* title and close button row */}
                 <div className="flex w-full items-center pb-3">
-                  <div className="mb-2 pr-36 text-3xl font-bold text-[#98989A]">
-                    Title
-                  </div>
-                  <button
-                    className="mb-4 pl-64 text-[#98989A]"
-                    onClick={closeModal}
-                  >
+                  <div className="mb-2 pr-36 text-3xl font-bold">Title</div>
+                  <button className="mb-4 pl-64" onClick={closeModal}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -40,14 +39,16 @@ export function ArticleModal({ showModal }: ArticleModalProps) {
                     </svg>
                   </button>
                 </div>
+                {/* content area (author and description) */}
                 <div>
-                  <div className="mb-2 text-[#98989A]">Author</div>
-                  <div className="mb-2 text-[#98989A]">Short description</div>
+                  <div className="mb-2">Author</div>
+                  <div className="mb-2">Short description</div>
                 </div>
+                {/* bottom area (link and save button) */}
                 <div className="mt-16">
-                  <div className="mb-2 text-[#98989A]">Link</div>
+                  <div className="mb-2">Link</div>
                   <button
-                    className="w-full rounded-lg border border-[#9C59B5] py-2 font-bold text-[#9C59B5]"
+                    className="w-full rounded-lg border border-purple-500 py-2 font-bold text-purple-500"
                     onClick={() => {
                       console.log('click')
                     }}

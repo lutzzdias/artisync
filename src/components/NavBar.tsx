@@ -1,10 +1,9 @@
+import logo from '@/assets/logo.svg'
 import { Search } from 'lucide-react'
 import Image from 'next/image'
-import logo from '@/assets/logo.svg'
-import ArticleButton from './ArticleButton'
+import { ArticleButton } from './ArticleButton'
 
 export function NavBar() {
-
   return (
     <>
       <header className="mb-6 flex flex-row items-center justify-between">
@@ -26,15 +25,14 @@ export function NavBar() {
                   type="search"
                   placeholder="Search by author or title"
                   maxLength={200}
-                  />
+                />
               </div>
             </form>
           </section>
           {/* create article button */}
-          <ArticleButton/>
+          <ArticleButton />
         </div>
       </header>
-      
     </>
   )
 }

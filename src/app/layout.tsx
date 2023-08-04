@@ -1,10 +1,9 @@
-import './globals.css'
 import React from 'react'
+import './globals.css'
 // eslint-disable-next-line camelcase
-import { Source_Sans_Pro, Montserrat } from 'next/font/google'
+import { Montserrat, Source_Sans_Pro } from 'next/font/google'
 
 import { NavBar } from '@/components/NavBar'
-import ArticleModal from '@/components/ArticleModal'
 
 const montserrat = Montserrat({
   subsets: ['latin'],

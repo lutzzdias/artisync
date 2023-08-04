@@ -1,11 +1,11 @@
-import Header from './components/Header'
-import Grid from './components/Grid'
+import { Grid } from 'lucide-react'
+import { Header } from './components/Header'
 
-export default function Home() {
+export function Home() {
   return (
     <div className="flex flex-col gap-5">
-      <Header/>
-      <Grid/>
+      <Header />
+      <Grid />
     </div>
   )
 }

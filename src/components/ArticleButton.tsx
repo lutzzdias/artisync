@@ -2,13 +2,13 @@
 
 import { Plus } from "lucide-react";
 import { useState } from "react";
+import ArticleModal from "./ArticleModal";
 
 export default function ArticleButton() {
     const [showModal, setShowModal] = useState(false);
 
     const createArticle = () => {
         setShowModal(true);
-        console.log('aaaaa')
     }
 
     return (
@@ -20,6 +20,10 @@ export default function ArticleButton() {
                 <Plus size={24} />
                 Create article
             </button>
+            {showModal? (
+                <ArticleModal showModal={showModal}/>
+            ) 
+            : null}
         </>
     )
 }

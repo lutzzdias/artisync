@@ -1,15 +1,9 @@
-"use client";
-
 import { Search } from 'lucide-react'
 import Image from 'next/image'
-
 import logo from '@/assets/logo.svg'
 import ArticleButton from './ArticleButton'
-import ArticleModal from './ArticleModal'
-import { useState } from 'react';
 
 export function NavBar() {
-  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -40,7 +34,7 @@ export function NavBar() {
           <ArticleButton/>
         </div>
       </header>
-      <ArticleModal showModal={true}/>
+      
     </>
   )
 }

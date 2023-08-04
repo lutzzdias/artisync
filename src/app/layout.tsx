@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${sourceSansPro.className} ${montserrat.className} bg-white-500 px-16 py-6`}
+        className={`${sourceSansPro.className} ${montserrat.className} bg-white-500 px-20 py-6`}
       >
         <NavBar />
         {children}

@@ -4,6 +4,7 @@ import React from 'react'
 import { Source_Sans_Pro, Montserrat } from 'next/font/google'
 
 import { NavBar } from '@/components/NavBar'
+import ArticleModal from '@/components/ArticleModal'
 
 const montserrat = Montserrat({
   subsets: ['latin'],

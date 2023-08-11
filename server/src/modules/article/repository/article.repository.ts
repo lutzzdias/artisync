@@ -1,5 +1,5 @@
 import { Article } from '../domain/entities/article.entity';
-import { IArticleRepository } from '../domain/interfaces/article-repository.interface';
+import { IArticleRepository } from '../domain/interfaces/article.repository.interface';
 
 // TODO: Implement with decided ORM or database
 export class ArticleRepository implements IArticleRepository {

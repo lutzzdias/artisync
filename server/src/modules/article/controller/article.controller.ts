@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { ArticleService } from '../application/article-service';
+import { ArticleService } from '../application/article.service';
 import { CreateArticleDto } from '../domain/dtos/create-article.dto';
 import { UpdateArticleDto } from '../domain/dtos/update-article.dto';
 

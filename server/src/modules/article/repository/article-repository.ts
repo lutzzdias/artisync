@@ -1,6 +1,7 @@
 import { Article } from '../domain/entities/article.entity';
 import { IArticleRepository } from '../domain/interfaces/article-repository.interface';
 
+// TODO: Implement with decided ORM or database
 export class ArticleRepository implements IArticleRepository {
   create(article: Article): Promise<Article> {
     throw new Error('Method not implemented.');

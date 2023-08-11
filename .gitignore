@@ -37,6 +37,9 @@ client/next-env.d.ts
 
 ## Server
 
+# .env
+server/.env
+
 # compiled output
 server/dist
 server/node_modules

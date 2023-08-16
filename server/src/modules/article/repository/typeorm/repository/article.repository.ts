@@ -1,10 +1,12 @@
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from 'src/modules/article/domain/entities/article.entity';
 import { IArticleRepository } from 'src/modules/article/domain/interfaces/article.repository.interface';
 import { Repository } from 'typeorm';
 import { ArticleSchema } from '../schema/article.schema';
 
-// TODO: Implement with decided ORM or database
+// TODO: Improve logic
+@Injectable()
 export class ArticleRepository implements IArticleRepository {
   constructor(
     @InjectRepository(ArticleSchema)
@@ -12,20 +14,24 @@ export class ArticleRepository implements IArticleRepository {
   ) {}
 
   async create(article: Article): Promise<ArticleSchema | void> {
-    throw new Error('Method not implemented.');
+    const createdArticle = await this.articleRepository.create(article);
+    return createdArticle;
   }
   async update(id: string, article: Article): Promise<ArticleSchema | void> {
-    throw new Error('Method not implemented.');
+    // TODO: fix logic
+    await this.articleRepository.update(id, article);
+    return article;
   }
   async delete(articleId: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    await this.articleRepository.delete(articleId);
   }
   async getById(articleId: string): Promise<ArticleSchema | void> {
     const options = { where: { id: articleId } };
-    const articleSchema = await this.articleRepository.findOne(options);
-    return articleSchema;
+    const article = await this.articleRepository.findOne(options);
+    return article;
   }
   async getAll(): Promise<Array<ArticleSchema>> {
-    throw new Error('Method not implemented.');
+    const articles = await this.articleRepository.find();
+    return articles;
   }
 }

@@ -3,13 +3,12 @@ import { SeederOptions } from 'typeorm-extension';
 
 export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
+  host: process.env.HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432', 10),
   username: process.env.DB_USER || 'admin',
   password: process.env.DB_PASSWORD || 'admin',
-  database: process.env.DB_NAME || 'artisync',
-  entities: ['dist/modules/**/*.schema.typeorm.impl.js'],
-  synchronize: process.env.ENVIRONMENT_TYPE === 'dev',
+  database: process.env.DB_NAME || 'artisync-db',
+  entities: ['dist/modules/**/*.schema.js'],
   migrationsTableName: 'Migrations',
   migrations: [`${__dirname}/migrations/**/*.ts`],
   seeds: [`${__dirname}/seeds/**/*.ts`],

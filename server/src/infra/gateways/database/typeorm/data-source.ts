@@ -8,15 +8,15 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
   username: process.env.DB_USER || 'admin',
   password: process.env.DB_PASSWORD || 'admin',
   database: process.env.DB_NAME || 'artisync-db',
-  entities: ['dist/modules/**/*.schema.js'],
-  migrationsTableName: 'Migrations',
-  migrations: [`${__dirname}/migrations/**/*.ts`],
-  seeds: [`${__dirname}/seeds/**/*.ts`],
-  factories: [`${__dirname}/factories/**/*.ts`],
+  entities: [`${__dirname}/modules/**/*.schema.{js,ts}`],
+  migrations: [`${__dirname}/**/migrations/**/*.{js,ts}`],
+  seeds: [`${__dirname}/**/seeds/**/*.{js,ts}`],
+  factories: [`${__dirname}/**/factories/**/*.{js,ts}`],
+  synchronize: false,
 };
 
 const cliConfig = {
-  migrationsDir: 'src/infra/gateways/database/typeorm/migrations',
+  migrationsDir: `${__dirname}/infra/gateways/database/typeorm/migrations`,
 };
 
 const dataSource = new DataSource(dataSourceOptions);

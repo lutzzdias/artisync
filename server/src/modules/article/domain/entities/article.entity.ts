@@ -4,7 +4,7 @@ import { UpdateArticleDto } from '../../application/dtos/update-article.dto';
 export class Article {
   id: string;
   title: string;
-  author: string; // TODO: change string -> Author entity
+  author: string;
   description: string;
   link: string;
   state: string; // TODO: change string -> Enum value

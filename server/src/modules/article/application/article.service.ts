@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common';
 
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Article } from '../domain/entities/article.entity';
 import { IArticleRepository } from '../domain/interfaces/article.repository.interface';
+import { ArticleRepository } from '../repository/typeorm/repository/article.repository';
+import { ArticleSchema } from '../repository/typeorm/schema/article.schema';
 import { CreateArticleDto } from './dtos/create-article.dto';
 import { UpdateArticleDto } from './dtos/update-article.dto';
 
 @Injectable()
 export class ArticleService {
-  repository: IArticleRepository;
+  private repository: IArticleRepository;
+  constructor(
+    @InjectRepository(ArticleSchema)
+    private readonly typeormRepository: Repository<ArticleSchema>,
+  ) {
+    this.repository = new ArticleRepository(typeormRepository);
+  }
 
   create(createArticleDto: CreateArticleDto) {
     // Convert from DTO to Entity

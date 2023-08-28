@@ -22,11 +22,12 @@ export class ArticleRepository implements IArticleRepository {
     await this.articleRepository.update(id, article);
     return article;
   }
-  async delete(articleId: string): Promise<void> {
-    await this.articleRepository.delete(articleId);
+  async delete(id: string): Promise<void> {
+    // TODO: Change return type
+    await this.articleRepository.delete(id);
   }
-  async getById(articleId: string): Promise<ArticleSchema | void> {
-    const options = { where: { id: articleId } };
+  async getById(id: string): Promise<ArticleSchema | void> {
+    const options = { where: { id: id } };
     const article = await this.articleRepository.findOne(options);
     return article;
   }

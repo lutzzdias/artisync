@@ -26,11 +26,13 @@ export class ArticleController {
     return this.articleService.getAll();
   }
 
+  // TODO: Verify URL query instead of different path (eg.: link?id=ajfdlskfjewh instead of link/ajfdlskfjewh)
   @Get(':id')
   getById(@Param('id') id: string) {
     return this.articleService.getById(id);
   }
 
+  // TODO: Verify URL query instead of different path (eg.: link?id=ajfdlskfjewh instead of link/ajfdlskfjewh)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
     return this.articleService.update(id, updateArticleDto);

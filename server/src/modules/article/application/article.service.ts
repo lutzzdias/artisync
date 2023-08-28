@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { Article } from '../domain/entities/article.entity';
 import { IArticleRepository } from '../domain/interfaces/article.repository.interface';
 import { ArticleRepository } from '../repository/typeorm/repository/article.repository';
@@ -19,32 +19,46 @@ export class ArticleService {
     this.repository = new ArticleRepository(typeormRepository);
   }
 
-  create(createArticleDto: CreateArticleDto) {
+  // TODO: fix creation
+  async create(createArticleDto: CreateArticleDto) {
     // Convert from DTO to Entity
     const article = Article.fromCreateArticleDto(createArticleDto);
     // TODO: Add logic
-    return this.repository.create(article);
+    return await this.repository.create(article);
   }
 
-  getAll() {
+  async getAll() {
     // TODO: Add logic
-    return this.repository.getAll();
+    return await this.repository.getAll();
   }
 
-  getById(id: string) {
+  async getById(id: string) {
     // TODO: Add logic
-    return this.repository.getById(id);
+    return await this.repository.getById(id);
   }
 
   // TODO: Send ID through parameter vs through DTO
-  update(id: string, updateArticleDto: UpdateArticleDto) {
-    const article = Article.fromUpdateArticleDto(updateArticleDto);
-    // TODO: Add logic
-    return this.repository.update(id, article);
+  // TODO: Add logic (if necessary)
+  // TODO: Add validation (probably inside the entity itself)
+  // TODO: Throw error if article was not found
+  async update(id: string, updateArticleDto: UpdateArticleDto) {
+    const articleSchema = await this.repository.getById(id);
+    if (articleSchema) {
+      // Convert schema to entity
+      const oldArticle = Article.fromSchema(articleSchema);
+      // Update old entity with received values
+      const updatedArticle = oldArticle.update(updateArticleDto);
+      // Save to the database
+      return await this.repository.update(id, updatedArticle);
+    } else {
+      // Return error
+      return new Article();
+    }
   }
 
-  delete(id: string) {
+  async delete(id: string) {
     // TODO: Add logic
-    return this.repository.delete(id);
+    // TODO: Add a return (success or error)
+    return await this.repository.delete(id);
   }
 }

@@ -8,9 +8,9 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { ArticleService } from '../application/article.service';
 import { CreateArticleDto } from '../dtos/create-article.dto';
 import { UpdateArticleDto } from '../dtos/update-article.dto';
+import { ArticleService } from '../service/article.service';
 
 @Controller('article')
 export class ArticleController {

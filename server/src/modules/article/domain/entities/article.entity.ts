@@ -45,7 +45,7 @@ export class Article {
     );
   }
 
-  update(updateArticleDto: UpdateArticleDto): Article {
+  fromUpdateArticleDto(updateArticleDto: UpdateArticleDto): Article {
     return new Article(
       this.id,
       updateArticleDto.title ?? this.title,

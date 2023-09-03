@@ -48,7 +48,7 @@ export class ArticleService {
       // Convert schema to entity
       const oldArticle = Article.fromSchema(articleSchema);
       // Update old entity with received values
-      const updatedArticle = oldArticle.update(updateArticleDto);
+      const updatedArticle = oldArticle.fromUpdateArticleDto(updateArticleDto);
       // Save to the database
       return await this.repository.update(id, updatedArticle);
     } else {

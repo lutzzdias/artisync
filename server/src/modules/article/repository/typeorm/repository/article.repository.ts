@@ -14,7 +14,7 @@ export class ArticleRepository implements IArticleRepository {
   ) {}
 
   async create(article: Article): Promise<ArticleSchema | void> {
-    const createdArticle = await this.articleRepository.create(article);
+    const createdArticle = await this.articleRepository.save(article);
     return createdArticle;
   }
   async update(id: string, article: Article): Promise<ArticleSchema | void> {

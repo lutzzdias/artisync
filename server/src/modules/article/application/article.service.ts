@@ -24,7 +24,9 @@ export class ArticleService {
     // Convert from DTO to Entity
     const article = Article.fromCreateArticleDto(createArticleDto);
     // TODO: Add logic
-    return await this.repository.create(article);
+    // Convert Entity to Schema
+    const articleSchema = Article.toSchema(article);
+    return await this.repository.create(articleSchema);
   }
 
   async getAll() {

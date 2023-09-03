@@ -13,7 +13,7 @@ export class ArticleRepository implements IArticleRepository {
     private readonly articleRepository: Repository<ArticleSchema>,
   ) {}
 
-  async create(article: IArticleSchema): Promise<ArticleSchema | void> {
+  async create(article: IArticleSchema): Promise<IArticleSchema | void> {
     const createdArticle = await this.articleRepository.save(article);
     return createdArticle;
   }
@@ -21,7 +21,7 @@ export class ArticleRepository implements IArticleRepository {
   async update(
     id: string,
     article: IArticleSchema,
-  ): Promise<ArticleSchema | void> {
+  ): Promise<IArticleSchema | void> {
     const updatedArticle = await this.articleRepository.save({
       id,
       ...article,
@@ -35,13 +35,13 @@ export class ArticleRepository implements IArticleRepository {
     await this.articleRepository.delete(id);
   }
 
-  async getById(id: string): Promise<ArticleSchema | void> {
+  async getById(id: string): Promise<IArticleSchema | void> {
     const options = { where: { id: id } };
     const article = await this.articleRepository.findOne(options);
     return article;
   }
 
-  async getAll(): Promise<Array<ArticleSchema>> {
+  async getAll(): Promise<Array<IArticleSchema>> {
     const articles = await this.articleRepository.find();
     return articles;
   }

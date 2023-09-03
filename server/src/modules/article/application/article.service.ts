@@ -19,7 +19,6 @@ export class ArticleService {
     this.repository = new ArticleRepository(typeormRepository);
   }
 
-  // TODO: fix creation
   async create(createArticleDto: CreateArticleDto) {
     // Convert from DTO to Entity
     const article = Article.fromCreateArticleDto(createArticleDto);

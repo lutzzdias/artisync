@@ -1,5 +1,6 @@
-import { CreateArticleDto } from '../../application/dtos/create-article.dto';
-import { UpdateArticleDto } from '../../application/dtos/update-article.dto';
+import { CreateArticleDto } from '../../dtos/create-article.dto';
+import { UpdateArticleDto } from '../../dtos/update-article.dto';
+import { IArticleSchema } from '../interfaces/article.schema.interface';
 
 export class Article {
   id: string;
@@ -33,27 +34,53 @@ export class Article {
 
   static fromCreateArticleDto(createArticleDto: CreateArticleDto): Article {
     return new Article(
-      null, // id
+      undefined, // id
       createArticleDto.title,
       createArticleDto.author,
       createArticleDto.description,
       createArticleDto.link,
       createArticleDto.state,
-      null, // createdAt
-      null, // updatedAt
+      undefined, // createdAt
+      undefined, // updatedAt
     );
   }
 
-  static fromUpdateArticleDto(updateArticleDto: UpdateArticleDto): Article {
+  fromUpdateArticleDto(updateArticleDto: UpdateArticleDto): Article {
     return new Article(
-      updateArticleDto.id,
-      updateArticleDto.title,
-      updateArticleDto.author,
-      updateArticleDto.description,
-      updateArticleDto.link,
-      updateArticleDto.state,
-      null, // createdAt
-      null, // updatedAt
+      this.id,
+      updateArticleDto.title ?? this.title,
+      updateArticleDto.author ?? this.author,
+      updateArticleDto.description ?? this.description,
+      updateArticleDto.link ?? this.link,
+      updateArticleDto.state ?? this.state,
+      this.createdAt, // createdAt
+      new Date(Date.now()), // updatedAt
     );
+  }
+
+  static fromSchema(schema: IArticleSchema): Article {
+    return new Article(
+      schema.id,
+      schema.title,
+      schema.author,
+      schema.description,
+      schema.link,
+      schema.state,
+      schema.createdAt,
+      schema.updatedAt,
+    );
+  }
+
+  static toSchema(article: Article): IArticleSchema {
+    return {
+      id: article.id,
+      title: article.title,
+      author: article.author,
+      description: article.description,
+      link: article.link,
+      state: article.state,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+    };
   }
 }

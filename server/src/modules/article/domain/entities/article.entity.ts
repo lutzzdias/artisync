@@ -1,5 +1,5 @@
-import { CreateArticleDto } from '../../application/dtos/create-article.dto';
-import { UpdateArticleDto } from '../../application/dtos/update-article.dto';
+import { CreateArticleDto } from '../../dtos/create-article.dto';
+import { UpdateArticleDto } from '../../dtos/update-article.dto';
 import { IArticleSchema } from '../interfaces/article.schema.interface';
 
 export class Article {

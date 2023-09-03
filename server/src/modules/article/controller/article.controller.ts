@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 
 import { ArticleService } from '../application/article.service';
-import { CreateArticleDto } from '../application/dtos/create-article.dto';
-import { UpdateArticleDto } from '../application/dtos/update-article.dto';
+import { CreateArticleDto } from '../dtos/create-article.dto';
+import { UpdateArticleDto } from '../dtos/update-article.dto';
 
 @Controller('article')
 export class ArticleController {

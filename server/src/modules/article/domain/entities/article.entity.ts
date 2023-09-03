@@ -70,4 +70,17 @@ export class Article {
       schema.updatedAt,
     );
   }
+
+  static toSchema(article: Article): IArticleSchema {
+    return {
+      id: article.id,
+      title: article.title,
+      author: article.author,
+      description: article.description,
+      link: article.link,
+      state: article.state,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+    };
+  }
 }

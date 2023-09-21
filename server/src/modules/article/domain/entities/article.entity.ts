@@ -2,13 +2,20 @@ import { CreateArticleDto } from '../../dtos/create-article.dto';
 import { UpdateArticleDto } from '../../dtos/update-article.dto';
 import { IArticleSchema } from '../interfaces/article.schema.interface';
 
+export enum ArticleState {
+  toRead = 'TO_READ',
+  inProgress = 'IN_PROGRESS',
+  done = 'DONE',
+  abandoned = 'ABANDONED',
+}
+
 export class Article {
   id: string;
   title: string;
   author: string;
   description: string;
   link: string;
-  state: string; // TODO: change string -> Enum value
+  state: ArticleState;
   createdAt: Date;
   updatedAt: Date;
 
@@ -18,7 +25,7 @@ export class Article {
     author?: string,
     description?: string,
     link?: string,
-    state?: string,
+    state?: ArticleState,
     createdAt?: Date,
     updatedAt?: Date,
   ) {

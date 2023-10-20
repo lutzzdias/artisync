@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ArticleStateService } from '../article-state.service';
+import { ArticleStateService } from '../service/article-state.service';
 import { ArticleStateController } from './article-state.controller';
 
 describe('ArticleStateController', () => {

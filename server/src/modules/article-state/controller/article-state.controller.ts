@@ -7,39 +7,39 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ArticleStateService } from '../article-state.service';
 import { CreateArticleStateDto } from '../dtos/create-article-state.dto';
 import { UpdateArticleStateDto } from '../dtos/update-article-state.dto';
+import { ArticleStateService } from '../service/article-state.service';
 
 @Controller('article-state')
 export class ArticleStateController {
   constructor(private readonly articleStateService: ArticleStateService) {}
 
   @Post()
-  create(@Body() createArticleStateDto: CreateArticleStateDto) {
-    return this.articleStateService.create(createArticleStateDto);
+  async create(@Body() createArticleStateDto: CreateArticleStateDto) {
+    return await this.articleStateService.create(createArticleStateDto);
   }
 
   @Get()
-  findAll() {
-    return this.articleStateService.findAll();
+  async getAll() {
+    return await this.articleStateService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.articleStateService.findOne(+id);
+  async getById(@Param('id') id: string) {
+    return await this.articleStateService.getById(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateArticleStateDto: UpdateArticleStateDto,
   ) {
-    return this.articleStateService.update(+id, updateArticleStateDto);
+    return await this.articleStateService.update(id, updateArticleStateDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.articleStateService.remove(+id);
+  async delete(@Param('id') id: string) {
+    return await this.articleStateService.delete(id);
   }
 }

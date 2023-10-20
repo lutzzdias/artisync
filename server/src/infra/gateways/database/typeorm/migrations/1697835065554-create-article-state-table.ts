@@ -1,8 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateArticleTable1692735423140 implements MigrationInterface {
+export class CreateArticleStateTable1697835065554
+  implements MigrationInterface
+{
   private table = new Table({
-    name: 'Article',
+    name: 'ArticleState',
     columns: [
       {
         name: 'id',
@@ -14,28 +16,15 @@ export class CreateArticleTable1692735423140 implements MigrationInterface {
         default: 'uuid_generate_v4()',
       },
       {
-        name: 'title',
+        name: 'name',
         type: 'varchar',
         isNullable: false,
-        isUnique: false,
-      },
-      {
-        name: 'author',
-        type: 'varchar',
-        isNullable: false,
-        isUnique: false,
+        isUnique: true,
       },
       {
         name: 'description',
         type: 'varchar',
-      },
-      {
-        name: 'link',
-        type: 'varchar',
-      },
-      {
-        name: 'state',
-        type: 'varchar',
+        isNullable: false,
       },
       {
         name: 'createdAt',

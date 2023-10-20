@@ -19,7 +19,7 @@
     "typeorm": "typeorm-ts-node-esm -d dist/infra/gateways/database/typeorm/data-source.js",
     "typeorm:migration:run": "pnpm run typeorm migration:run",
     "typeorm:migration:revert": "pnpm run typeorm migration:revert",
-    "typeorm:migrate:create": "typeorm migration:create",
+    "typeorm:migration:create": "typeorm migration:create",
     "typeorm:seed": "pnpm exec typeorm-extension seed:run -d dist/infra/gateways/database/typeorm/data-source.js",
     "typeorm:drop": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/gateways/database/typeorm/data-source.js db:drop",
     "typeorm:create": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/gateways/database/typeorm/data-source.js db:create",

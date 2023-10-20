@@ -10,11 +10,11 @@ import { ArticleSchema } from '../schema/article.schema';
 export class ArticleRepository implements IArticleRepository {
   constructor(
     @InjectRepository(ArticleSchema)
-    private readonly articleRepository: Repository<ArticleSchema>,
+    private readonly repository: Repository<ArticleSchema>,
   ) {}
 
   async create(article: IArticleSchema): Promise<IArticleSchema | void> {
-    const createdArticle = await this.articleRepository.save(article);
+    const createdArticle = await this.repository.save(article);
     return createdArticle;
   }
 
@@ -22,7 +22,7 @@ export class ArticleRepository implements IArticleRepository {
     id: string,
     article: IArticleSchema,
   ): Promise<IArticleSchema | void> {
-    const updatedArticle = await this.articleRepository.save({
+    const updatedArticle = await this.repository.save({
       id,
       ...article,
     });
@@ -32,17 +32,17 @@ export class ArticleRepository implements IArticleRepository {
 
   async delete(id: string): Promise<void> {
     // TODO: Change return type
-    await this.articleRepository.delete(id);
+    await this.repository.delete(id);
   }
 
   async getById(id: string): Promise<IArticleSchema | void> {
     const options = { where: { id: id } };
-    const article = await this.articleRepository.findOne(options);
+    const article = await this.repository.findOne(options);
     return article;
   }
 
   async getAll(): Promise<Array<IArticleSchema>> {
-    const articles = await this.articleRepository.find();
+    const articles = await this.repository.find();
     return articles;
   }
 }

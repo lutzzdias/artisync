@@ -2,7 +2,7 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateArticleTable1692735423140 implements MigrationInterface {
   private table = new Table({
-    name: 'article',
+    name: 'Article',
     columns: [
       {
         name: 'id',

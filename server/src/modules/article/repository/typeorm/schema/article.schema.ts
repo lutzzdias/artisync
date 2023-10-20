@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'article' })
+@Entity({ name: 'Article' })
 export class ArticleSchema implements IArticleSchema {
   @PrimaryGeneratedColumn('uuid')
   id: string;

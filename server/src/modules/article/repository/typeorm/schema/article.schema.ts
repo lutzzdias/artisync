@@ -1,3 +1,4 @@
+import { ArticleState } from 'src/modules/article/domain/entities/article.entity';
 import { IArticleSchema } from 'src/modules/article/domain/interfaces/article.schema.interface';
 import {
   Column,
@@ -25,7 +26,7 @@ export class ArticleSchema implements IArticleSchema {
   link: string;
 
   @Column({ length: 255 })
-  state: string; // TODO: change string -> Enum value
+  state: ArticleState;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   @CreateDateColumn()

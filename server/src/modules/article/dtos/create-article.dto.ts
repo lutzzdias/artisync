@@ -1,8 +1,10 @@
+import { ArticleState } from '../domain/entities/article.entity';
+
 // TODO: Add nest decorators (@ApiProperty, @IsString, etc)
 export class CreateArticleDto {
   title: string;
-  author: string; // TODO: change string -> Author entity
+  author: string;
   description: string;
   link: string;
-  state: string; // TODO: change string -> Enum value
+  state: ArticleState;
 }

@@ -1,1 +1,4 @@
-export class CreateArticleStateDto {}
+export class CreateArticleStateDto {
+  name: string;
+  description: string;
+}

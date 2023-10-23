@@ -10,6 +10,7 @@ for how to contribute, as well as some basic information about the project.
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installing Dependencies](#installing-dependencies)
+  - [Env Variables](#env-variables)
 - [Migrations](#migrations)
   - [Creating Migrations](#creating-migrations)
   - [Reverting Migrations](#reverting-migrations)
@@ -50,6 +51,19 @@ brew install pnpm
 - using chocolatey:
 ```bash
 choco install pnpm
+```
+
+### Env Variables
+This project reads environment variables from a `.env` file. You should create
+your own `.env` file in the root directory of the project, and add the following
+variables to it:
+
+```
+HOST=your-host
+DB_PORT=9999
+DB_USER=your-db-user
+DB_PASSWORD=your-db-password
+DB_NAME=your-db-name
 ```
 
 ## Migrations

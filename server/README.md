@@ -1,73 +1,140 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# ArtiSync
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Server
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This README is related to the backend of ArtiSync. It contains a few guidelines 
+for how to contribute, as well as some basic information about the project.
 
-## Description
+## Table of Contents
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installing Dependencies](#installing-dependencies)
+- [Migrations](#migrations)
+  - [Creating Migrations](#creating-migrations)
+  - [Reverting Migrations](#reverting-migrations)
+- [Contributing](#contributing)
+  - [Pull Requests](#pull-requests)
+  - [Commit Patterns](#commit-patterns)
+- [License](#license)
 
-## Installation
+## Getting Started
 
+Provide information on how to set up the project for development.
+
+### Prerequisites
+
+This project is built with [NestJS](https://nestjs.com/), using [typeORM](https://typeorm.io/) 
+as its ORM and [PostgreSQL](https://www.postgresql.org/) as its database. In order
+to facilitate development, we use [Docker](https://www.docker.com/) to run the 
+database in a container.
+
+### Installing Dependencies
+
+The **package manager** used is [pnpm](https://pnpm.io/), which is very similar
+to npm but is faster and more efficient.
+
+_You must have **node** installed in order to pnpm to work._
+
+There are multiple ways of installing pnpm, some are listed below:
+- using npm:
 ```bash
-$ pnpm install
+npm install -g pnpm
 ```
 
-## Running the app
-
+- using homebrew:
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+brew install pnpm
 ```
 
-## Test
-
+- using chocolatey:
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+choco install pnpm
 ```
 
-## Support
+## Migrations
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Migrations are a way to manage and version control changes to a database schema.
+They provide a systematic and reproducible way to make and track modifications to 
+the structure of a database, such as adding new tables, altering existing ones, 
+or creating indexes. 
+Migrations typically consist of both an "up" migration to apply changes and a "down" 
+migration to revert them, ensuring that developers can move both forward and backward 
+in the evolution of the database schema.
 
-## Stay in touch
+### Creating Migrations
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+In order to create a migration, you must execute the following command (assuming
+you're in the root directory of the project):
 
-## License
+```bash
+pnpm run typeorm:migration:create ./src/infra/gateways/database/typeorm/migrations/{name-of-migration}
+```
 
-Nest is [MIT licensed](LICENSE).
+- The name of the migration should be lower case and use dashes to separate words.
+- It's name usually describes the changes that are being made to the database in a concise
+manner. 
+- The verbs should be in the imperative form (e.g., "create-user-table",
+"insert-default-states").
+
+### Reverting Migrations
+
+In case the migration you created did not have the desired effect, you can revert
+it by executing the following command (assuming you're in the root directory of
+the project):
+
+```bash
+pnpm run typeorm:migration:revert
+```
+
+This will undo all the changes that were made by the last migration. But it will
+not delete the migration file itself, so you can reapply it after fixing what was
+wrong with it.
+
+## Contributing
+
+This section provides a few guidelines about patterns that should be followed when
+contributing to the project.
+
+### Pull Requests
+
+In order to create Pull Requests:
+
+1. Fork the repository
+2. Create a new branch for your feature/bugfix
+3. Push your changes to your branch
+4. Create a pull request
+5. Include a clear and concise description of your changes
+6. Wait for the PR to be reviewed and merged
+
+The pull requests names should be descriptive and concise. The verbs should be in
+the imperative form (e.g., "Insert default article states", "Refactor forgot
+password flow").
+
+### Commit Patterns
+
+The commit messages should follow the _semantic commit messages_ pattern. Commits
+are organized into the following categories:
+
+* feat: new feature
+* fix: bug fix
+* refactor: rewrite/restructure code but does not change behavior
+* perf: performance specific commits
+* style: formatting, missing semi colons, white space, formatting, etc
+* test: adding missing tests, refactoring tests
+* docs: changes to the documentation, TODOs and comments
+* build: affect build components, eg. build tool, ci pipeline, dependencies, project version, etc
+* ops: operational components, eg. infrastructure, deployment, backup, recovery, etc
+* chore: miscellaneous commits, eg. modifying .gitignore
+
+The commit message verbs should be in the imperative form (e.g., "Fix issue with
+user authentication", "Add new article state"). The commit message should also
+include a brief description of the changes that were made.
+
+Since this repo contains both backend and frontend code, after the commit category
+tag, there should be a tag (within brackets) indicating which part of the project was affected by
+the commit. For example:
+
+```
+fix [server]: rename article schema table name
+```

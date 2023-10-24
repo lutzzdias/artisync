@@ -32,20 +32,18 @@ export class ArticleService {
   }
 
   // TODO: Send ID through parameter vs through DTO
-  // TODO: Add logic (if necessary)
-  // TODO: Add validation (probably inside the entity itself)
-  // TODO: Throw error if article was not found
   async update(id: string, updateArticleDto: UpdateArticleDto) {
     const articleSchema = await this.repository.getById(id);
     if (articleSchema) {
       // Convert schema to entity
       const oldArticle = Article.fromSchema(articleSchema);
+      // TODO: Validation and logic
       // Update old entity with received values
       const updatedArticle = oldArticle.fromUpdateArticleDto(updateArticleDto);
       // Save to the database
       return await this.repository.update(id, updatedArticle);
     } else {
-      // Return error
+      // TODO: Return error
       return new Article();
     }
   }

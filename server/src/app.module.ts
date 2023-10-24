@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeormModule } from './infra/gateways/database/typeorm/typeorm.module';
 import { ArticleStateModule } from './modules/article-state/article-state.module';
 import { ArticleModule } from './modules/article/article.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ArticleModule } from './modules/article/article.module';
     TypeormModule,
     ArticleModule,
     ArticleStateModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],

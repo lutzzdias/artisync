@@ -6,7 +6,7 @@ export interface IUserSchema {
   bio: string;
   // profilePic: string; // TODO: Future implementation (cloud or blob)
   lastLogin?: Date;
-  deletedDefaultStates?: Set<string>;
+  deletedDefaultStates?: string[];
   createdAt?: Date;
   updatedAt?: Date;
 }

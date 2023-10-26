@@ -34,8 +34,9 @@ export class UserService {
       // TODO: Validation and logic
       // Update old entity with received values
       const updatedUser = oldUser.fromUpdateUserDto(updateUserDto);
+      const updatedUserSchema = User.toSchema(updatedUser);
       // Save to the database
-      return await this.repository.update(id, updatedUser);
+      return await this.repository.update(id, updatedUserSchema);
     } else {
       // TODO: Return error
       return new User();

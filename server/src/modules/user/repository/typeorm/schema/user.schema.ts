@@ -27,8 +27,8 @@ export class UserSchema implements IUserSchema {
   @Column({ type: 'timestamp' })
   lastLogin?: Date;
 
-  @Column({ type: 'set' })
-  deletedDefaultStates?: Set<string>;
+  @Column('text', { array: true })
+  deletedDefaultStates?: string[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   @CreateDateColumn()

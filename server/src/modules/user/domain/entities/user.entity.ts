@@ -77,7 +77,7 @@ export class User {
       schema.bio,
       // schema.profilePic,
       schema.lastLogin,
-      schema.deletedDefaultStates,
+      new Set(schema.deletedDefaultStates),
       schema.createdAt,
       schema.updatedAt,
     );
@@ -92,7 +92,7 @@ export class User {
       bio: user.bio,
       // profilePic: user.profilePic,
       lastLogin: user.lastLogin,
-      deletedDefaultStates: user.deletedDefaultStates,
+      deletedDefaultStates: Array.from(user.deletedDefaultStates),
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };

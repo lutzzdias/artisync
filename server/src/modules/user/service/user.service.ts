@@ -6,46 +6,46 @@ import { UpdateUserDto } from '../dtos/update-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @Inject('IUserRepository')
-    private readonly repository: IUserRepository,
-  ) {}
+    constructor(
+        @Inject('IUserRepository')
+        private readonly repository: IUserRepository,
+    ) {}
 
-  async create(createUserDto: CreateUserDto) {
-    // Convert from DTO to Entity
-    const user = User.fromCreateUserDto(createUserDto);
-    // TODO: Add logic
-    // Convert Entity to Schema
-    const userSchema = User.toSchema(user);
-    return await this.repository.create(userSchema);
-  }
-
-  async getById(id: string) {
-    // TODO: Add logic
-    return await this.repository.getById(id);
-  }
-
-  // TODO: Send ID through parameter vs through DTO
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    const userSchema = await this.repository.getById(id);
-    if (userSchema) {
-      // Convert schema to entity
-      const oldUser = User.fromSchema(userSchema);
-      // TODO: Validation and logic
-      // Update old entity with received values
-      const updatedUser = oldUser.fromUpdateUserDto(updateUserDto);
-      const updatedUserSchema = User.toSchema(updatedUser);
-      // Save to the database
-      return await this.repository.update(id, updatedUserSchema);
-    } else {
-      // TODO: Return error
-      return new User();
+    async create(createUserDto: CreateUserDto) {
+        // Convert from DTO to Entity
+        const user = User.fromCreateUserDto(createUserDto);
+        // TODO: Add logic
+        // Convert Entity to Schema
+        const userSchema = User.toSchema(user);
+        return await this.repository.create(userSchema);
     }
-  }
 
-  async delete(id: string) {
-    // TODO: Add logic
-    // TODO: Add a return (success or error)
-    return await this.repository.delete(id);
-  }
+    async getById(id: string) {
+        // TODO: Add logic
+        return await this.repository.getById(id);
+    }
+
+    // TODO: Send ID through parameter vs through DTO
+    async update(id: string, updateUserDto: UpdateUserDto) {
+        const userSchema = await this.repository.getById(id);
+        if (userSchema) {
+            // Convert schema to entity
+            const oldUser = User.fromSchema(userSchema);
+            // TODO: Validation and logic
+            // Update old entity with received values
+            const updatedUser = oldUser.fromUpdateUserDto(updateUserDto);
+            const updatedUserSchema = User.toSchema(updatedUser);
+            // Save to the database
+            return await this.repository.update(id, updatedUserSchema);
+        } else {
+            // TODO: Return error
+            return new User();
+        }
+    }
+
+    async delete(id: string) {
+        // TODO: Add logic
+        // TODO: Add a return (success or error)
+        return await this.repository.delete(id);
+    }
 }

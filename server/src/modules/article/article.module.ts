@@ -7,14 +7,14 @@ import { ArticleSchema } from './repository/typeorm/schema/article.schema';
 import { ArticleService } from './service/article.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ArticleSchema])],
-  controllers: [ArticleController],
-  providers: [
-    ArticleService,
-    {
-      provide: 'IArticleRepository',
-      useClass: ArticleRepository,
-    },
-  ],
+    imports: [TypeOrmModule.forFeature([ArticleSchema])],
+    controllers: [ArticleController],
+    providers: [
+        ArticleService,
+        {
+            provide: 'IArticleRepository',
+            useClass: ArticleRepository,
+        },
+    ],
 })
 export class ArticleModule {}

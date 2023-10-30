@@ -7,14 +7,14 @@ import { ArticleModule } from './modules/article/article.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    TypeormModule,
-    ArticleModule,
-    ArticleStateModule,
-    UserModule,
-  ],
-  controllers: [],
-  providers: [],
+    imports: [
+        ConfigModule.forRoot(),
+        TypeormModule,
+        ArticleModule,
+        ArticleStateModule,
+        UserModule,
+    ],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}

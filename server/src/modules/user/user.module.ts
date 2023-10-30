@@ -6,14 +6,14 @@ import { UserSchema } from './repository/typeorm/schema/user.schema';
 import { UserService } from './service/user.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserSchema])],
-  controllers: [UserController],
-  providers: [
-    UserService,
-    {
-      provide: 'IUserRepository',
-      useClass: UserRepository,
-    },
-  ],
+    imports: [TypeOrmModule.forFeature([UserSchema])],
+    controllers: [UserController],
+    providers: [
+        UserService,
+        {
+            provide: 'IUserRepository',
+            useClass: UserRepository,
+        },
+    ],
 })
 export class UserModule {}

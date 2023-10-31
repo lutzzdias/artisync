@@ -7,10 +7,10 @@ export class User {
     email: string;
     password: string; // TODO: make it safe
     username: string;
-    bio: string;
+    bio?: string;
     // profilePic: string; // TODO: Future implementation (cloud or blob)
-    lastLogin: Date;
-    deletedDefaultStates: Set<string>;
+    lastLogin?: Date;
+    deletedDefaultStates?: Set<string>;
     createdAt: Date;
     updatedAt: Date;
 

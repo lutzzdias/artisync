@@ -29,15 +29,18 @@ export class CreateUserTable1698331328999 implements MigrationInterface {
                 // TODO: make it safe eg. hash it
                 name: 'password',
                 type: 'varchar',
+                isNullable: false,
             },
             {
                 name: 'bio',
                 type: 'varchar',
                 length: '510',
+                isNullable: true,
             },
             {
                 name: 'lastLogin',
                 type: 'timestamp',
+                isNullable: true,
             },
             {
                 name: 'deletedDefaultStates',

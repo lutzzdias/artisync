@@ -7,46 +7,46 @@ import { ArticleStateSchema } from '../schema/article-state.schema';
 
 @Injectable()
 export class ArticleStateRepository implements IArticleStateRepository {
-  constructor(
-    @InjectRepository(ArticleStateSchema)
-    private readonly articleStateRepository: Repository<ArticleStateSchema>,
-  ) {}
+    constructor(
+        @InjectRepository(ArticleStateSchema)
+        private readonly articleStateRepository: Repository<ArticleStateSchema>,
+    ) {}
 
-  async create(
-    articleState: IArticleStateSchema,
-  ): Promise<void | IArticleStateSchema> {
-    const createdArticleState = await this.articleStateRepository.save(
-      articleState,
-    );
-    return createdArticleState;
-  }
+    async create(
+        articleState: IArticleStateSchema,
+    ): Promise<void | IArticleStateSchema> {
+        const createdArticleState = await this.articleStateRepository.save(
+            articleState,
+        );
+        return createdArticleState;
+    }
 
-  async update(
-    id: string,
-    articleState: IArticleStateSchema,
-  ): Promise<void | IArticleStateSchema> {
-    const updatedArticleState = await this.articleStateRepository.save({
-      id,
-      ...articleState,
-    });
+    async update(
+        id: string,
+        articleState: IArticleStateSchema,
+    ): Promise<void | IArticleStateSchema> {
+        const updatedArticleState = await this.articleStateRepository.save({
+            id,
+            ...articleState,
+        });
 
-    return updatedArticleState;
-  }
+        return updatedArticleState;
+    }
 
-  async delete(articleStateId: string): Promise<void> {
-    await this.articleStateRepository.delete(articleStateId);
-  }
+    async delete(articleStateId: string): Promise<void> {
+        await this.articleStateRepository.delete(articleStateId);
+    }
 
-  async getById(articleStateId: string): Promise<void | IArticleStateSchema> {
-    const options = { where: { id: articleStateId } };
+    async getById(articleStateId: string): Promise<void | IArticleStateSchema> {
+        const options = { where: { id: articleStateId } };
 
-    const articleState = await this.articleStateRepository.findOne(options);
+        const articleState = await this.articleStateRepository.findOne(options);
 
-    return articleState;
-  }
+        return articleState;
+    }
 
-  async getAll(): Promise<IArticleStateSchema[]> {
-    const articleStates = await this.articleStateRepository.find();
-    return articleStates;
-  }
+    async getAll(): Promise<IArticleStateSchema[]> {
+        const articleStates = await this.articleStateRepository.find();
+        return articleStates;
+    }
 }

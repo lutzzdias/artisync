@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateArticleTable1692735423140 implements MigrationInterface {
+export class CreateUserTable1698331328999 implements MigrationInterface {
     private table = new Table({
-        name: 'Article',
+        name: 'User',
         columns: [
             {
                 name: 'id',
@@ -14,28 +14,39 @@ export class CreateArticleTable1692735423140 implements MigrationInterface {
                 default: 'uuid_generate_v4()',
             },
             {
-                name: 'title',
+                name: 'email',
                 type: 'varchar',
                 isNullable: false,
-                isUnique: false,
+                isUnique: true,
             },
             {
-                name: 'author',
+                name: 'username',
                 type: 'varchar',
                 isNullable: false,
-                isUnique: false,
+                isUnique: true,
             },
             {
-                name: 'description',
+                // TODO: make it safe eg. hash it
+                name: 'password',
                 type: 'varchar',
+                isNullable: false,
             },
             {
-                name: 'link',
+                name: 'bio',
                 type: 'varchar',
+                length: '510',
+                isNullable: true,
             },
             {
-                name: 'state',
-                type: 'varchar',
+                name: 'lastLogin',
+                type: 'timestamp',
+                isNullable: true,
+            },
+            {
+                name: 'deletedDefaultStates',
+                type: 'text',
+                isArray: true,
+                isNullable: true,
             },
             {
                 name: 'createdAt',

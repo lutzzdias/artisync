@@ -6,11 +6,14 @@ import { ArticleStateSchema } from './repository/typeorm/schema/article-state.sc
 import { ArticleStateService } from './service/article-state.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ArticleStateSchema])],
-  controllers: [ArticleStateController],
-  providers: [
-    ArticleStateService,
-    { provide: 'IArticleStateRepository', useClass: ArticleStateRepository },
-  ],
+    imports: [TypeOrmModule.forFeature([ArticleStateSchema])],
+    controllers: [ArticleStateController],
+    providers: [
+        ArticleStateService,
+        {
+            provide: 'IArticleStateRepository',
+            useClass: ArticleStateRepository,
+        },
+    ],
 })
 export class ArticleStateModule {}

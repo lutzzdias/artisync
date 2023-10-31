@@ -1,5 +1,4 @@
-import { ArticleState } from 'src/modules/article/domain/entities/article.entity';
-import { IArticleSchema } from 'src/modules/article/domain/interfaces/article.schema.interface';
+import { IUserSchema } from 'src/modules/user/domain/interfaces/user.schema.interface';
 import {
     Column,
     CreateDateColumn,
@@ -8,25 +7,28 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'Article' })
-export class ArticleSchema implements IArticleSchema {
+@Entity({ name: 'User' })
+export class UserSchema implements IUserSchema {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id?: string;
+
+    @Column({ length: 255, unique: true })
+    email: string;
+
+    @Column({ length: 255, unique: true })
+    username: string;
 
     @Column({ length: 255 })
-    title: string;
-
-    @Column({ length: 255 })
-    author: string;
+    password: string;
 
     @Column({ length: 510 })
-    description: string;
+    bio: string;
 
-    @Column({ length: 255 })
-    link: string;
+    @Column({ type: 'timestamp' })
+    lastLogin?: Date;
 
-    @Column({ length: 255 })
-    state: ArticleState;
+    @Column('text', { array: true })
+    deletedDefaultStates?: string[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     @CreateDateColumn()

@@ -1,9 +1,10 @@
+import { faker } from '@faker-js/faker';
 import { setSeederFactory } from 'typeorm-extension';
 
 import { ArticleState } from 'src/modules/article/domain/entities/article.entity';
 import { ArticleSchema } from 'src/modules/article/repository/typeorm/schema/article.schema';
 
-export default setSeederFactory(ArticleSchema, (faker) => {
+export default setSeederFactory(ArticleSchema, () => {
     return <ArticleSchema>{
         title: faker.commerce.productName(),
         author: faker.person.fullName(),

@@ -19,6 +19,11 @@ together {
         created_on : datetime
     }
 
+    entity "DeletedDefaultStatus" as deletedStatus {
+      *user_id : string <<FK>>
+      *status_id : string <<FK>>
+    }
+
     entity "Article" as article {
         *id: string <<generated>>
         ..

@@ -5,7 +5,7 @@ import { IS_PUBLIC_KEY } from './public.guard';
 
 // Runs JWT strategy before controller method
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
+export class JwtAuthGuard extends AuthGuard('access-token') {
     constructor(private reflector: Reflector) {
         super();
     }

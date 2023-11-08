@@ -1,38 +1,52 @@
 import {
     Body,
     Controller,
-    Get,
+    HttpCode,
+    HttpStatus,
     Post,
     Request,
     UseGuards,
 } from '@nestjs/common';
 
-import { CreateUserDto } from '../user/dtos/create-user.dto';
 import { AuthService } from './auth.service';
+import { RegisterDto } from './dtos/register.dto';
+import { SignInDto } from './dtos/signin.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
 import { Public } from './guards/public.guard';
+import { RefreshTokenGuard } from './guards/refresh.guard';
+import { Tokens } from './types/tokens.type';
 
 @Controller()
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @UseGuards(LocalAuthGuard) // Runs verify user before login
     @Public()
-    @Post('auth/login')
-    async login(@Request() req) {
-        return this.authService.login(req.user);
+    @Post('auth/signin')
+    @HttpCode(HttpStatus.OK)
+    async signin(@Body() signInDto: SignInDto): Promise<Tokens> {
+        return await this.authService.signin(signInDto);
     }
 
     @Public()
     @Post('auth/register')
-    async register(@Body() createUserDto: CreateUserDto) {
-        return this.authService.register(createUserDto);
+    @HttpCode(HttpStatus.CREATED)
+    async register(@Body() registerDto: RegisterDto): Promise<Tokens> {
+        return await this.authService.register(registerDto);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('profile')
-    getProfile(@Request() req) {
-        return req.user;
+    @Post('auth/logout')
+    @HttpCode(HttpStatus.OK)
+    async logout(@Request() req) {
+        const user = req.user;
+        return await this.authService.logout(user.sub);
+    }
+
+    @UseGuards(RefreshTokenGuard)
+    @Post('auth/refresh')
+    @HttpCode(HttpStatus.OK)
+    async refresh(@Request() req) {
+        const user = req.user;
+        return this.authService.refresh(user.sub, user.refreshToken);
     }
 }

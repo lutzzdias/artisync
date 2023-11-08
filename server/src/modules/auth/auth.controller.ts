@@ -11,7 +11,6 @@ import {
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dtos/register.dto';
 import { SignInDto } from './dtos/signin.dto';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { Public } from './guards/public.guard';
 import { RefreshTokenGuard } from './guards/refresh.guard';
 import { Tokens } from './types/tokens.type';
@@ -34,7 +33,6 @@ export class AuthController {
         return await this.authService.register(registerDto);
     }
 
-    @UseGuards(JwtAuthGuard)
     @Post('auth/logout')
     @HttpCode(HttpStatus.OK)
     async logout(@Request() req) {
@@ -42,6 +40,7 @@ export class AuthController {
         return await this.authService.logout(user.sub);
     }
 
+    @Public()
     @UseGuards(RefreshTokenGuard)
     @Post('auth/refresh')
     @HttpCode(HttpStatus.OK)

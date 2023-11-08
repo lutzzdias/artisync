@@ -92,8 +92,7 @@ export class AuthService {
 
     async refresh(userId: string, refreshToken: string) {
         const user = await this.userService.getById(userId);
-        console.log(user);
-        if (!user) throw new ForbiddenException('Access denied');
+        if (!user || !user.refreshToken) throw ForbiddenException;
 
         const isRefreshTokenValid = await this.isHashValid(
             user.refreshToken,

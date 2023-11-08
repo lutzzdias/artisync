@@ -11,7 +11,7 @@ export class JwtAuthGuard extends AuthGuard('access-token') {
     }
 
     canActivate(context: ExecutionContext): boolean {
-        // Alow anonymous access when @AllowAnon() decorator is used
+        // Alow anonymous access when @Public() decorator is used
         const isPublic = this.reflector.getAllAndOverride<boolean>(
             IS_PUBLIC_KEY,
             [context.getHandler(), context.getClass()],

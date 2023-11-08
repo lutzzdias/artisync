@@ -65,7 +65,7 @@ export class User {
             updateUserDto.username ?? this.username,
             updateUserDto.bio ?? this.bio,
             // updateUserDto.profilePic ?? this.profilePic,
-            updateUserDto.refreshToken ?? this.refreshToken,
+            updateUserDto.refreshToken,
             this.lastLogin,
             this.deletedDefaultStates,
             this.createdAt,

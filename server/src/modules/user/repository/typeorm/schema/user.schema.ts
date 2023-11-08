@@ -21,14 +21,17 @@ export class UserSchema implements IUserSchema {
     @Column({ length: 255 })
     password: string;
 
-    @Column({ length: 510 })
-    bio: string;
+    @Column({ length: 510, nullable: true })
+    bio?: string;
+
+    @Column({ length: 255, nullable: true })
+    refreshToken?: string;
 
     @Column({ type: 'timestamp' })
     lastLogin?: Date;
 
     @Column('text', { array: true })
-    deletedDefaultStates?: string[];
+    deletedDefaultStates?: string[]; // TODO: Create new table for this
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     @CreateDateColumn()

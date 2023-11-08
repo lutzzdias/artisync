@@ -10,6 +10,7 @@ export default setSeederFactory(UserSchema, async () => {
         username: faker.internet.userName(),
         password: await argon.hash(faker.internet.password()),
         bio: faker.person.bio(),
+        refreshToken: await argon.hash(faker.database.mongodbObjectId()),
         lastLogin: faker.date.recent(),
         deletedDefaultStates: [],
     };

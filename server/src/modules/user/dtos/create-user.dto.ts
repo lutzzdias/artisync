@@ -3,6 +3,7 @@ export class CreateUserDto {
     email: string;
     password: string;
     username: string;
-    bio: string;
+    refreshToken?: string;
+    bio?: string;
     // profilePic: string;
 }

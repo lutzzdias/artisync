@@ -9,6 +9,7 @@ export class User {
     username: string;
     bio?: string;
     // profilePic: string; // TODO: Future implementation (cloud or blob)
+    refreshToken?: string;
     lastLogin?: Date;
     deletedDefaultStates?: Set<string>;
     createdAt: Date;
@@ -21,6 +22,7 @@ export class User {
         username?: string,
         bio?: string,
         // profilePic?: string,
+        refreshToken?: string,
         lastLogin?: Date,
         deletedDefaultStates?: Set<string>,
         createdAt?: Date,
@@ -32,6 +34,7 @@ export class User {
         this.username = username;
         this.bio = bio;
         // this.profilePic = profilePic;
+        this.refreshToken = refreshToken;
         this.lastLogin = lastLogin;
         this.deletedDefaultStates = deletedDefaultStates;
         this.createdAt = createdAt;
@@ -46,6 +49,7 @@ export class User {
             createUserDto.username,
             createUserDto.bio,
             // createUserDto.profilePic,
+            createUserDto.refreshToken,
             undefined, // lastLogin
             new Set<string>(), // deletedDefaultStates
             undefined, // createdAt
@@ -61,6 +65,7 @@ export class User {
             updateUserDto.username ?? this.username,
             updateUserDto.bio ?? this.bio,
             // updateUserDto.profilePic ?? this.profilePic,
+            updateUserDto.refreshToken,
             this.lastLogin,
             this.deletedDefaultStates,
             this.createdAt,
@@ -76,6 +81,7 @@ export class User {
             schema.username,
             schema.bio,
             // schema.profilePic,
+            schema.refreshToken,
             schema.lastLogin,
             new Set(schema.deletedDefaultStates),
             schema.createdAt,
@@ -91,6 +97,7 @@ export class User {
             username: user.username,
             bio: user.bio,
             // profilePic: user.profilePic,
+            refreshToken: user.refreshToken,
             lastLogin: user.lastLogin,
             deletedDefaultStates: Array.from(user.deletedDefaultStates),
             createdAt: user.createdAt,

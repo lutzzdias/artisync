@@ -25,6 +25,11 @@ export class UserService {
         return await this.repository.getById(id);
     }
 
+    async getByUsername(username: string) {
+        // TODO: Add logic
+        return await this.repository.getByUsername(username);
+    }
+
     // TODO: Send ID through parameter vs through DTO
     async update(id: string, updateUserDto: UpdateUserDto) {
         const userSchema = await this.repository.getById(id);

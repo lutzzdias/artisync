@@ -32,6 +32,7 @@ export class UserService {
         return result;
     }
 
+    // TODO: Check if it's ok to refresh token through here
     async update(id: string, updateUserDto: UpdateUserDto) {
         const user = await this.userRepository.getById(id);
         const { ...updatedUserData } = updateUserDto;
@@ -41,7 +42,7 @@ export class UserService {
             email: updatedUserData.email ?? user.email,
             password: updatedUserData.password ?? user.password,
             bio: updatedUserData.bio ?? user.bio,
-            refreshToken: user.refreshToken,
+            refreshToken: updatedUserData.refreshToken ?? user.refreshToken,
             createdAt: user.createdAt,
             updatedAt: new Date(),
         };

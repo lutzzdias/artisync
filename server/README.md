@@ -82,7 +82,7 @@ In order to create a migration, you must execute the following command (assuming
 you're in the root directory of the project):
 
 ```bash
-pnpm run typeorm:migration:create ./src/infra/gateways/database/typeorm/migrations/{name-of-migration}
+pnpm run typeorm:migration:create ./src/infra/database/migrations/{name-of-migration}
 ```
 
 - The name of the migration should be lower case and use dashes to separate words.

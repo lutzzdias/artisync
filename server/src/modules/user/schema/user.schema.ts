@@ -4,6 +4,7 @@ import { User } from '../entity/user.entity';
 export const UserSchema = new EntitySchema<User>({
     name: 'User',
     target: User,
+    tableName: 'User',
     columns: {
         id: {
             type: String,

@@ -1,5 +1,5 @@
 export class User {
-    id: string;
+    id?: string; // Optional to allow db to generate id
     username: string;
     email: string;
     password: string;

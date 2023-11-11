@@ -7,10 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { AccessTokenStrategy } from './strategies/access-token.strategy';
-import { LocalStrategy } from './strategies/local.strategy';
-import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
+import { ArgonHelper } from './helper/argon.helper';
+import { AccessTokenStrategy } from './strategy/access-token.strategy';
+import { LocalStrategy } from './strategy/local.strategy';
+import { RefreshTokenStrategy } from './strategy/refresh-token.strategy';
 
 @Module({
     imports: [
@@ -25,10 +26,12 @@ import { RefreshTokenStrategy } from './strategies/refresh-token.strategy';
         LocalStrategy,
         AccessTokenStrategy,
         RefreshTokenStrategy,
+        ArgonHelper,
         {
             provide: APP_GUARD,
             useClass: JwtAuthGuard,
         },
     ],
+    exports: [AuthService, ArgonHelper],
 })
 export class AuthModule {}

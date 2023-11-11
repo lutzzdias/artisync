@@ -9,11 +9,11 @@ import {
 } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dtos/register.dto';
-import { SignInDto } from './dtos/signin.dto';
-import { Public } from './guards/public.guard';
-import { RefreshTokenGuard } from './guards/refresh.guard';
-import { Tokens } from './types/tokens.type';
+import { RegisterDto } from './dto/register.dto';
+import { SignInDto } from './dto/signin.dto';
+import { Public } from './guard/public.guard';
+import { RefreshTokenGuard } from './guard/refresh.guard';
+import { Tokens } from './type/tokens.type';
 
 @Controller()
 export class AuthController {
@@ -33,6 +33,7 @@ export class AuthController {
         return await this.authService.register(registerDto);
     }
 
+    // TODO: Not use @Request
     @Post('auth/logout')
     @HttpCode(HttpStatus.OK)
     async logout(@Request() req) {
@@ -40,8 +41,9 @@ export class AuthController {
         return await this.authService.logout(user.sub);
     }
 
-    @Public()
-    @UseGuards(RefreshTokenGuard)
+    // TODO: Not use @Request
+    @Public() // Allow to not send Access Token
+    @UseGuards(RefreshTokenGuard) // Require Refresh Token
     @Post('auth/refresh')
     @HttpCode(HttpStatus.OK)
     async refresh(@Request() req) {

@@ -34,13 +34,13 @@ export class UserService {
 
     async update(id: string, updateUserDto: UpdateUserDto) {
         const user = await this.userRepository.getById(id);
-        const { ...userData } = updateUserDto;
+        const { ...updatedUserData } = updateUserDto;
         const updatedUser: User = {
             id: id,
-            username: userData.username ?? user.username,
-            email: userData.email ?? user.email,
-            password: userData.password ?? user.password,
-            bio: userData.bio ?? user.bio,
+            username: updatedUserData.username ?? user.username,
+            email: updatedUserData.email ?? user.email,
+            password: updatedUserData.password ?? user.password,
+            bio: updatedUserData.bio ?? user.bio,
             refreshToken: user.refreshToken,
             createdAt: user.createdAt,
             updatedAt: new Date(),

@@ -17,6 +17,7 @@ import { UserService } from '../service/user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    // TODO: Ensure name and email are unique
     @Post()
     async create(@Body() createUserDto: CreateUserDto) {
         const { ...userData } = createUserDto;
@@ -43,6 +44,7 @@ export class UserController {
         return result;
     }
 
+    // TODO: Do not allow to update username, email and password by this endpoint
     @Patch(':id')
     async update(
         @Param('id') id: string,

@@ -18,14 +18,14 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "lint": "eslint src --ext .ts",
     "lint:fix": "pnpm lint --fix",
-    "typeorm": "typeorm-ts-node-esm -d dist/infra/gateways/database/typeorm/data-source.js",
+    "typeorm": "typeorm-ts-node-esm -d dist/infra/database/data-source.js",
     "typeorm:migration:run": "pnpm run typeorm migration:run",
     "typeorm:migration:revert": "pnpm run typeorm migration:revert",
     "typeorm:migration:create": "typeorm migration:create",
-    "typeorm:seed": "pnpm exec typeorm-extension seed:run -d dist/infra/gateways/database/typeorm/data-source.js",
-    "typeorm:drop": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/gateways/database/typeorm/data-source.js db:drop",
-    "typeorm:create": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/gateways/database/typeorm/data-source.js db:create",
-    "typeorm:reset": "pnpm run typeorm:drop && pnpm run typeorm:create && pnpm run typeorm:seed"
+    "typeorm:seed": "pnpm exec typeorm-extension seed:run -d dist/infra/database/data-source.js",
+    "typeorm:drop": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/database/data-source.js db:drop",
+    "typeorm:create": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/database/data-source.js db:create",
+    "typeorm:reset": "pnpm run typeorm:drop && pnpm run typeorm:create && pnpm run typeorm:migration:run && pnpm run typeorm:seed"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -37,6 +37,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.0",
     "argon2": "^0.31.2",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",

@@ -17,7 +17,6 @@ import { UserService } from '../service/user.service';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    // TODO: Ensure name and email are unique
     @Post()
     async create(@Body() createUserDto: CreateUserDto) {
         const { ...userData } = createUserDto;

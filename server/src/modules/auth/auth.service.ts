@@ -61,6 +61,7 @@ export class AuthService {
             !this.argonHelper.isHashValid(user.password, signInDto.password)
         )
             throw new ForbiddenException('Invalid credentials');
+
         const tokens: Tokens = this.generateTokens(user.id);
         await this.updateRefreshToken(user.id, tokens.refresh_token);
         return tokens;

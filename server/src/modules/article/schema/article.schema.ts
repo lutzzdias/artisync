@@ -11,6 +11,24 @@ export const ArticleSchema = new EntitySchema<Article>({
             primary: true,
             generated: 'uuid',
         },
+        title: {
+            type: String,
+            length: 255,
+        },
+        description: {
+            type: String,
+            length: 510,
+            nullable: true,
+        },
+        link: {
+            type: String,
+            length: 255,
+            nullable: true,
+        },
+        author: {
+            type: String,
+            length: 255,
+        },
         createdAt: {
             type: Date,
             createDate: true,
@@ -18,6 +36,15 @@ export const ArticleSchema = new EntitySchema<Article>({
         updatedAt: {
             type: Date,
             updateDate: true,
+        },
+    },
+    relations: {
+        user: {
+            type: 'many-to-one',
+            target: 'User',
+            joinColumn: {
+                name: 'userId',
+            },
         },
     },
 });

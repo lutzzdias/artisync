@@ -26,7 +26,7 @@ export class CreateArticleDto {
     author: string;
 
     @IsUUID()
-    userId: string; // FK
+    userId: string;
 
     // statusId: string; // FK
 

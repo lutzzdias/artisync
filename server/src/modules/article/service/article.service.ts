@@ -29,6 +29,11 @@ export class ArticleService {
         const { ...updatedArticleData } = updateArticleDto;
         const updatedArticle: Article = {
             id: id,
+            title: updatedArticleData.title ?? article.title,
+            description: updatedArticleData.description ?? article.description,
+            link: updatedArticleData.link ?? article.link,
+            author: updatedArticleData.author ?? article.author,
+            user: article.user,
             createdAt: article.createdAt,
             updatedAt: new Date(),
         };

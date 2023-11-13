@@ -42,9 +42,15 @@ export const ArticleSchema = new EntitySchema<Article>({
         user: {
             type: 'many-to-one',
             target: 'User',
+            nullable: false,
             joinColumn: {
                 name: 'userId',
             },
+        },
+    },
+    relationIds: {
+        userId: {
+            relationName: 'user',
         },
     },
 });

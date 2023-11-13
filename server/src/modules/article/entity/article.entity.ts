@@ -7,6 +7,7 @@ export class Article {
     link?: string;
     author: string;
     user?: User; // FK
+    userId: string;
     // statusId: string; // FK
     // projectId?: string; // FK
     createdAt?: Date;

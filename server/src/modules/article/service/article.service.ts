@@ -34,6 +34,7 @@ export class ArticleService {
             link: updatedArticleData.link ?? article.link,
             author: updatedArticleData.author ?? article.author,
             user: article.user,
+            userId: article.userId,
             createdAt: article.createdAt,
             updatedAt: new Date(),
         };

@@ -5,31 +5,14 @@ import {
     Get,
     Param,
     Patch,
-    Post,
     Query,
 } from '@nestjs/common';
-import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { User } from '../entity/user.entity';
 import { UserService } from '../service/user.service';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
-
-    @Post()
-    async create(@Body() createUserDto: CreateUserDto) {
-        const { ...userData } = createUserDto;
-        const user: User = { ...userData };
-        const result = await this.userService.create(user);
-        return result;
-    }
-
-    @Get()
-    async getAll() {
-        const result = await this.userService.getAll();
-        return result;
-    }
 
     @Get(':id')
     async getById(@Param('id') id: string) {
@@ -37,9 +20,16 @@ export class UserController {
         return result;
     }
 
+    // TODO: See if there should exist a get all here
     @Get()
-    async getByUsername(@Query('username') username: string) {
-        const result = await this.userService.getByUsername(username);
+    async getByTextData(
+        @Query('username') username: string,
+        @Query('email') email: string,
+    ) {
+        let result;
+        if (username) result = await this.userService.getByUsername(username);
+        else if (email) result = await this.userService.getByEmail(email);
+        else result = await this.userService.getAll();
         return result;
     }
 

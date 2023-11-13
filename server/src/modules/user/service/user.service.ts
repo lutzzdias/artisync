@@ -58,6 +58,7 @@ export class UserService {
             email: updatedUserData.email ?? user.email,
             password: updatedUserData.password ?? user.password,
             bio: updatedUserData.bio ?? user.bio,
+            // TODO: Fix refresh token update for logout -> must set it as null
             refreshToken: updatedUserData.refreshToken ?? user.refreshToken,
             createdAt: user.createdAt,
             updatedAt: new Date(),

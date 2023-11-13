@@ -21,10 +21,9 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "pnpm lint --fix",
 
-    "typeorm": "typeorm-ts-node-esm -d dist/infra/database/data-source.js",
-    "migration:run": "pnpm typeorm migration:run",
-    "migration:revert": "pnpm typeorm migration:revert",
-    "migration:create": "pnpm typeorm migration:create",
+    "migration:run": "pnpx typeorm migration:run -d dist/infra/database/data-source.js",
+    "migration:revert": "pnpx typeorm migration:revert -d dist/infra/database/data-source.js",
+    "migration:create": "pnpx typeorm migration:create",
 
     "db:seed": "pnpm exec typeorm-extension seed:run -d dist/infra/database/data-source.js",
     "db:drop": "pnpm run build && pnpm exec typeorm-extension --initialDatabase=postgres -d dist/infra/database/data-source.js db:drop",

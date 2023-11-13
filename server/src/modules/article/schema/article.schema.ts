@@ -29,6 +29,9 @@ export const ArticleSchema = new EntitySchema<Article>({
             type: String,
             length: 255,
         },
+        userId: {
+            type: 'uuid',
+        },
         createdAt: {
             type: Date,
             createDate: true,
@@ -42,15 +45,12 @@ export const ArticleSchema = new EntitySchema<Article>({
         user: {
             type: 'many-to-one',
             target: 'User',
+            onDelete: 'CASCADE',
             nullable: false,
             joinColumn: {
+                referencedColumnName: 'id',
                 name: 'userId',
             },
-        },
-    },
-    relationIds: {
-        userId: {
-            relationName: 'user',
         },
     },
 });

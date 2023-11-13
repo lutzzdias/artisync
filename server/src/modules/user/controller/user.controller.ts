@@ -49,6 +49,7 @@ export class UserController {
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
+        // TODO: Convert from UpdateUserDto to User
         const result = await this.userService.update(id, updateUserDto);
         return result;
     }

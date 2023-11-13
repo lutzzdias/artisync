@@ -7,6 +7,10 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
+import { CreateArticleDto } from '../dto/create-article.dto';
+import { UpdateArticleDto } from '../dto/update-article.dto';
+import { Article } from '../entity/article.entity';
+import { ArticleService } from '../service/article.service';
 
 @Controller('article')
 export class ArticleController {
@@ -14,7 +18,9 @@ export class ArticleController {
 
     @Post()
     async create(@Body() createArticleDto: CreateArticleDto) {
-        return 'post';
+        const article: Article = { ...createArticleDto };
+        const result = await this.articleService.create(article);
+        return result;
     }
 
     @Get()
@@ -34,6 +40,7 @@ export class ArticleController {
         @Param('id') id: string,
         @Body() updateArticleDto: UpdateArticleDto,
     ) {
+        // TODO: Convert from UpdateArticleDto to Article
         const result = await this.articleService.update(id, updateArticleDto);
         return result;
     }

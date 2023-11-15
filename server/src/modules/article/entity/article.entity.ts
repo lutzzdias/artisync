@@ -1,3 +1,4 @@
+import { Status } from 'src/modules/status/entity/status.entity';
 import { User } from 'src/modules/user/entity/user.entity';
 
 export class Article {
@@ -8,7 +9,8 @@ export class Article {
     author: string;
     user?: User; // FK
     userId: string;
-    // statusId: string; // FK
+    status?: Status; // FK
+    statusId: string;
     // projectId?: string; // FK
     createdAt?: Date;
     updatedAt?: Date;

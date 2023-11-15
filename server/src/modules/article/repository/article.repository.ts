@@ -3,6 +3,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from '../entity/article.entity';
 
+export type GetArticleOptions = {
+    id?: string;
+    userId?: string;
+};
+
 @Injectable()
 export class ArticleRepository {
     constructor(
@@ -15,8 +20,9 @@ export class ArticleRepository {
         return article;
     }
 
-    async getAll(): Promise<Article[]> {
-        return await this.articleRepository.find();
+    async getAll(options?: GetArticleOptions): Promise<Article[]> {
+        const opt = { where: { ...options } };
+        return await this.articleRepository.find(opt);
     }
 
     async getById(id: string): Promise<Article> {

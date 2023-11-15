@@ -28,11 +28,6 @@ export class CreateStatusTable1700046265813 implements MigrationInterface {
                 length: '7',
             },
             {
-                name: 'author',
-                type: 'varchar',
-                length: '255',
-            },
-            {
                 name: 'userId',
                 type: 'uuid',
                 isNullable: true,

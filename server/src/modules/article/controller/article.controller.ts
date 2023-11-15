@@ -35,6 +35,13 @@ export class ArticleController {
         return result;
     }
 
+    @Get('user/:userId')
+    async getByUserId(@Param('userId') userId: string) {
+        console.log(userId);
+        const result = await this.articleService.getByUserId(userId);
+        return result;
+    }
+
     @Patch(':id')
     async update(
         @Param('id') id: string,

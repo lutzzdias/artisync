@@ -28,7 +28,8 @@ export class CreateArticleDto {
     @IsUUID()
     userId: string;
 
-    // statusId: string; // FK
+    @IsUUID()
+    statusId: string;
 
     // projectId?: string; // FK
 

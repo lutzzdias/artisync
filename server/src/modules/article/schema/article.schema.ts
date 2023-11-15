@@ -32,6 +32,9 @@ export const ArticleSchema = new EntitySchema<Article>({
         userId: {
             type: 'uuid',
         },
+        statusId: {
+            type: 'uuid',
+        },
         createdAt: {
             type: Date,
             createDate: true,
@@ -50,6 +53,16 @@ export const ArticleSchema = new EntitySchema<Article>({
             joinColumn: {
                 referencedColumnName: 'id',
                 name: 'userId',
+            },
+        },
+        status: {
+            type: 'many-to-one',
+            target: 'Status',
+            onDelete: 'CASCADE',
+            nullable: false,
+            joinColumn: {
+                referencedColumnName: 'id',
+                name: 'statusId',
             },
         },
     },

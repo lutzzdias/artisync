@@ -1,11 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UserService } from 'src/modules/user/service/user.service';
 import { UpdateArticleDto } from '../dto/update-article.dto';
 import { Article } from '../entity/article.entity';
-import { ArticleRepository } from '../repository/article.repository';
+import {
+    ArticleRepository,
+    GetArticleOptions,
+} from '../repository/article.repository';
 
 @Injectable()
 export class ArticleService {
-    constructor(private readonly articleRepository: ArticleRepository) {}
+    constructor(
+        private readonly articleRepository: ArticleRepository,
+        private readonly userService: UserService,
+    ) {}
 
     async create(article: Article) {
         const result = await this.articleRepository.create(article);
@@ -15,6 +22,16 @@ export class ArticleService {
     async getAll() {
         const result = await this.articleRepository.getAll();
         return result;
+    }
+
+    async getByUserId(userId: string): Promise<Article[]> {
+        const user = await this.userService.getById(userId);
+        if (!user) throw new NotFoundException('User not found');
+
+        const options: GetArticleOptions = { userId: userId };
+        const articles = await this.articleRepository.getAll(options);
+
+        return articles;
     }
 
     async getById(id: string) {
@@ -33,8 +50,8 @@ export class ArticleService {
             description: updatedArticleData.description ?? article.description,
             link: updatedArticleData.link ?? article.link,
             author: updatedArticleData.author ?? article.author,
-            user: article.user,
             userId: article.userId,
+            statusId: updateArticleDto.statusId ?? article.statusId,
             createdAt: article.createdAt,
             updatedAt: new Date(),
         };

@@ -6,7 +6,7 @@ export class Status {
     description?: string;
     color: string; // hex for color
 
-    User?: User; // FK
+    user?: User; // FK
     userId?: string; // if null -> is default
 
     createdAt?: Date;

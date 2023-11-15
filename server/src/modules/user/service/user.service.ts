@@ -1,56 +1,78 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { User } from '../domain/entities/user.entity';
-import { IUserRepository } from '../domain/interfaces/user.repository.interface';
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
+import {
+    ConflictException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { User } from '../entity/user.entity';
+import { UserRepository } from '../repository/user.repository';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @Inject('IUserRepository')
-        private readonly repository: IUserRepository,
-    ) {}
+    constructor(private readonly userRepository: UserRepository) {}
 
-    async create(createUserDto: CreateUserDto) {
-        // Convert from DTO to Entity
-        const user = User.fromCreateUserDto(createUserDto);
-        // TODO: Add logic
-        // Convert Entity to Schema
-        const userSchema = User.toSchema(user);
-        return await this.repository.create(userSchema);
+    async create(user: User) {
+        const usernameExists = await this.userRepository.getByUsername(
+            user.username,
+        );
+        if (usernameExists)
+            throw new ConflictException('Username already exists');
+
+        const emailExists = await this.userRepository.getByEmail(user.email);
+        if (emailExists) throw new ConflictException('Email already exists');
+
+        const result = await this.userRepository.create(user);
+        return result;
+    }
+
+    async getAll() {
+        const result = await this.userRepository.getAll();
+        return result;
     }
 
     async getById(id: string) {
-        // TODO: Add logic
-        return await this.repository.getById(id);
+        const result = await this.userRepository.getById(id);
+        return result;
     }
 
     async getByUsername(username: string) {
-        // TODO: Add logic
-        return await this.repository.getByUsername(username);
+        const result = await this.userRepository.getByUsername(username);
+        return result;
     }
 
-    // TODO: Send ID through parameter vs through DTO
+    async getByEmail(email: string) {
+        const result = await this.userRepository.getByEmail(email);
+        return result;
+    }
+
+    // TODO: Check if it's ok to refresh token through here
+    // TODO: Implement username and email update restrictions
     async update(id: string, updateUserDto: UpdateUserDto) {
-        const userSchema = await this.repository.getById(id);
-        if (userSchema) {
-            // Convert schema to entity
-            const oldUser = User.fromSchema(userSchema);
-            // TODO: Validation and logic
-            // Update old entity with received values
-            const updatedUser = oldUser.fromUpdateUserDto(updateUserDto);
-            const updatedUserSchema = User.toSchema(updatedUser);
-            // Save to the database
-            return await this.repository.update(id, updatedUserSchema);
-        } else {
-            // TODO: Return error
-            return new User();
-        }
+        const user = await this.userRepository.getById(id);
+        if (!user) throw new NotFoundException('User not found');
+
+        const { ...updatedUserData } = updateUserDto;
+        const updatedUser: User = {
+            id: id,
+            username: updatedUserData.username ?? user.username,
+            email: updatedUserData.email ?? user.email,
+            password: updatedUserData.password ?? user.password,
+            bio: updatedUserData.bio ?? user.bio,
+            // TODO: Fix refresh token update for logout -> must set it as null
+            refreshToken: updatedUserData.refreshToken ?? user.refreshToken,
+            createdAt: user.createdAt,
+            updatedAt: new Date(),
+        };
+        const result = await this.userRepository.update(updatedUser);
+        return result;
     }
 
     async delete(id: string) {
-        // TODO: Add logic
-        // TODO: Add a return (success or error)
-        return await this.repository.delete(id);
+        // check if user exists
+        const user = await this.userRepository.getById(id);
+        if (!user) throw new NotFoundException('User not found');
+
+        const result = await this.userRepository.delete(id);
+        return result;
     }
 }

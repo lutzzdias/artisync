@@ -1,57 +1,54 @@
-import { Inject, Injectable } from '@nestjs/common';
-
-import { Article } from '../domain/entities/article.entity';
-import { IArticleRepository } from '../domain/interfaces/article.repository.interface';
-import { CreateArticleDto } from '../dtos/create-article.dto';
-import { UpdateArticleDto } from '../dtos/update-article.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { UpdateArticleDto } from '../dto/update-article.dto';
+import { Article } from '../entity/article.entity';
+import { ArticleRepository } from '../repository/article.repository';
 
 @Injectable()
 export class ArticleService {
-    constructor(
-        @Inject('IArticleRepository')
-        private readonly repository: IArticleRepository,
-    ) {}
+    constructor(private readonly articleRepository: ArticleRepository) {}
 
-    async create(createArticleDto: CreateArticleDto) {
-        // Convert from DTO to Entity
-        const article = Article.fromCreateArticleDto(createArticleDto);
-        // TODO: Add logic
-        // Convert Entity to Schema
-        const articleSchema = Article.toSchema(article);
-        return await this.repository.create(articleSchema);
+    async create(article: Article) {
+        const result = await this.articleRepository.create(article);
+        return result;
     }
 
     async getAll() {
-        // TODO: Add logic
-        return await this.repository.getAll();
+        const result = await this.articleRepository.getAll();
+        return result;
     }
 
     async getById(id: string) {
-        // TODO: Add logic
-        return await this.repository.getById(id);
+        const result = await this.articleRepository.getById(id);
+        return result;
     }
 
-    // TODO: Send ID through parameter vs through DTO
     async update(id: string, updateArticleDto: UpdateArticleDto) {
-        const articleSchema = await this.repository.getById(id);
-        if (articleSchema) {
-            // Convert schema to entity
-            const oldArticle = Article.fromSchema(articleSchema);
-            // TODO: Validation and logic
-            // Update old entity with received values
-            const updatedArticle =
-                oldArticle.fromUpdateArticleDto(updateArticleDto);
-            // Save to the database
-            return await this.repository.update(id, updatedArticle);
-        } else {
-            // TODO: Return error
-            return new Article();
-        }
+        const article = await this.articleRepository.getById(id);
+        if (!article) throw new NotFoundException('Article not found');
+
+        const { ...updatedArticleData } = updateArticleDto;
+        const updatedArticle: Article = {
+            id: id,
+            title: updatedArticleData.title ?? article.title,
+            description: updatedArticleData.description ?? article.description,
+            link: updatedArticleData.link ?? article.link,
+            author: updatedArticleData.author ?? article.author,
+            user: article.user,
+            userId: article.userId,
+            createdAt: article.createdAt,
+            updatedAt: new Date(),
+        };
+
+        const result = await this.articleRepository.update(updatedArticle);
+        return result;
     }
 
     async delete(id: string) {
-        // TODO: Add logic
-        // TODO: Add a return (success or error)
-        return await this.repository.delete(id);
+        // check if article exists
+        const article = await this.articleRepository.getById(id);
+        if (!article) throw new NotFoundException('Article not found');
+
+        const result = await this.articleRepository.delete(id);
+        return result;
     }
 }

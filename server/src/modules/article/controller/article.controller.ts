@@ -7,9 +7,9 @@ import {
     Patch,
     Post,
 } from '@nestjs/common';
-
-import { CreateArticleDto } from '../dtos/create-article.dto';
-import { UpdateArticleDto } from '../dtos/update-article.dto';
+import { CreateArticleDto } from '../dto/create-article.dto';
+import { UpdateArticleDto } from '../dto/update-article.dto';
+import { Article } from '../entity/article.entity';
 import { ArticleService } from '../service/article.service';
 
 @Controller('article')
@@ -18,17 +18,21 @@ export class ArticleController {
 
     @Post()
     async create(@Body() createArticleDto: CreateArticleDto) {
-        return await this.articleService.create(createArticleDto);
+        const article: Article = { ...createArticleDto };
+        const result = await this.articleService.create(article);
+        return result;
     }
 
     @Get()
     async getAll() {
-        return await this.articleService.getAll();
+        const result = await this.articleService.getAll();
+        return result;
     }
 
     @Get(':id')
     async getById(@Param('id') id: string) {
-        return await this.articleService.getById(id);
+        const result = await this.articleService.getById(id);
+        return result;
     }
 
     @Patch(':id')
@@ -36,11 +40,14 @@ export class ArticleController {
         @Param('id') id: string,
         @Body() updateArticleDto: UpdateArticleDto,
     ) {
-        return await this.articleService.update(id, updateArticleDto);
+        // TODO: Convert from UpdateArticleDto to Article
+        const result = await this.articleService.update(id, updateArticleDto);
+        return result;
     }
 
     @Delete(':id')
     async delete(@Param('id') id: string) {
-        return await this.articleService.delete(id);
+        const result = await this.articleService.delete(id);
+        return result;
     }
 }

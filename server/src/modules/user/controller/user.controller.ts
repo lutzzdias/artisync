@@ -5,36 +5,48 @@ import {
     Get,
     Param,
     Patch,
-    Post,
+    Query,
 } from '@nestjs/common';
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserService } from '../service/user.service';
 
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
-    @Post()
-    async create(@Body() createUserDto: CreateUserDto) {
-        return await this.userService.create(createUserDto);
-    }
-
     @Get(':id')
     async getById(@Param('id') id: string) {
-        return await this.userService.getById(id);
+        const result = await this.userService.getById(id);
+        return result;
     }
 
+    // TODO: See if there should exist a get all here
+    @Get()
+    async getByTextData(
+        @Query('username') username: string,
+        @Query('email') email: string,
+    ) {
+        let result;
+        if (username) result = await this.userService.getByUsername(username);
+        else if (email) result = await this.userService.getByEmail(email);
+        else result = await this.userService.getAll();
+        return result;
+    }
+
+    // TODO: Do not allow to update username, email and password by this endpoint
     @Patch(':id')
     async update(
         @Param('id') id: string,
         @Body() updateUserDto: UpdateUserDto,
     ) {
-        return await this.userService.update(id, updateUserDto);
+        // TODO: Convert from UpdateUserDto to User
+        const result = await this.userService.update(id, updateUserDto);
+        return result;
     }
 
     @Delete(':id')
     async delete(@Param('id') id: string) {
-        return await this.userService.delete(id);
+        const result = await this.userService.delete(id);
+        return result;
     }
 }

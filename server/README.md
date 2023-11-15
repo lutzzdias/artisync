@@ -16,7 +16,7 @@ for how to contribute, as well as some basic information about the project.
   - [Reverting Migrations](#reverting-migrations)
 - [Contributing](#contributing)
   - [Pull Requests](#pull-requests)
-  - [Commit Patterns](#commit-patterns)
+  - [Commits](#commits)
 - [License](#license)
 
 ## Getting Started
@@ -59,11 +59,14 @@ your own `.env` file in the root directory of the project, and add the following
 variables to it:
 
 ```
-HOST=your-host
-DB_PORT=9999
-DB_USER=your-db-user
-DB_PASSWORD=your-db-password
-DB_NAME=your-db-name
+HOST=<host-name>
+DB_PORT=<port-number>
+DB_USER=<database-user>
+DB_PASSWORD=<database-password>
+DB_NAME=<database-name>
+
+ACCESS_TOKEN_SECRET=<secret>
+REFRESH_TOKEN_SECRET=<secret>
 ```
 
 ## Migrations
@@ -82,10 +85,10 @@ In order to create a migration, you must execute the following command (assuming
 you're in the root directory of the project):
 
 ```bash
-pnpm run typeorm:migration:create ./src/infra/gateways/database/typeorm/migrations/{name-of-migration}
+pnpm run typeorm:migration:create ./src/infra/database/migrations/{name-of-migration}
 ```
 
-- The name of the migration should be lower case and use dashes to separate words.
+- The name of the migration, in the command, should be lower case and use dashes to separate words.
 - It's name usually describes the changes that are being made to the database in a concise
 manner. 
 - The verbs should be in the imperative form (e.g., "create-user-table",
@@ -112,7 +115,17 @@ contributing to the project.
 
 ### Pull Requests
 
-In order to create Pull Requests:
+The PR title should follow exactly the following pattern:
+
+```
+#X - <description or issue title>
+```
+
+Where x is the issue number. The PR description should contain a link to the
+issue that it is related to. Possibly with the `closes` keyword, so that the
+issue is automatically closed when the PR is merged.
+
+#### How to create a PR
 
 1. Fork the repository
 2. Create a new branch for your feature/bugfix
@@ -125,7 +138,7 @@ The pull requests names should be descriptive and concise. The verbs should be i
 the imperative form (e.g., "Insert default article states", "Refactor forgot
 password flow").
 
-### Commit Patterns
+### Commits
 
 The commit messages should follow the _semantic commit messages_ pattern. Commits
 are organized into the following categories:
@@ -140,6 +153,7 @@ are organized into the following categories:
 * build: affect build components, eg. build tool, ci pipeline, dependencies, project version, etc
 * ops: operational components, eg. infrastructure, deployment, backup, recovery, etc
 * chore: miscellaneous commits, eg. modifying .gitignore
+* merge: #X from lutzzdias/branch-name -> X is the PR number
 
 The commit message verbs should be in the imperative form (e.g., "Fix issue with
 user authentication", "Add new article state"). The commit message should also
@@ -152,3 +166,7 @@ the commit. For example:
 ```
 fix [server]: rename article schema table name
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md)

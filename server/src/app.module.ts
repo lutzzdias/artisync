@@ -5,6 +5,7 @@ import { TypeormModule } from './infra/database/typeorm.module';
 import { ArticleModule } from './modules/article/article.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
+import { StatusModule } from './modules/status/status.module';
 
 @Module({
     imports: [
@@ -13,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
         AuthModule,
         UserModule,
         ArticleModule,
+        StatusModule,
     ],
     controllers: [],
     providers: [],

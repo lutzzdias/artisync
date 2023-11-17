@@ -1,6 +1,5 @@
----
-title: Entity Relationship Diagram
----
+# Entity Relationship Diagram
+
 ```mermaid
 erDiagram
 %%{init: {'theme':'dark'}}%%

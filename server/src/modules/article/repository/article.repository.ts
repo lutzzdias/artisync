@@ -16,25 +16,31 @@ export class ArticleRepository {
     ) {}
 
     async create(article: Article): Promise<Article> {
-        await this.articleRepository.save(article);
-        return article;
+        const result = await this.articleRepository.save(article);
+        return result;
     }
 
-    async getAll(options?: GetArticleOptions): Promise<Article[]> {
-        const opt = { where: { ...options } };
-        return await this.articleRepository.find(opt);
+    async getAll(): Promise<Article[]> {
+        const result = await this.articleRepository.find();
+        return result;
     }
 
     async getById(id: string): Promise<Article> {
         const options = { where: { id } };
-        const article = await this.articleRepository.findOne(options);
-        return article;
+        const result = await this.articleRepository.findOne(options);
+        return result;
+    }
+
+    async getByUserId(userId: string): Promise<Article[]> {
+        const options = { where: { userId } };
+        const result = await this.articleRepository.find(options);
+        return result;
     }
 
     async update(article: Article): Promise<Article> {
         // TODO: Stop using save and use update instead
-        article = await this.articleRepository.save(article);
-        return article;
+        const result = await this.articleRepository.save(article);
+        return result;
     }
 
     async delete(id: string): Promise<void> {

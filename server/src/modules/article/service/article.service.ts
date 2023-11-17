@@ -2,10 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserService } from 'src/modules/user/service/user.service';
 import { UpdateArticleDto } from '../dto/update-article.dto';
 import { Article } from '../entity/article.entity';
-import {
-    ArticleRepository,
-    GetArticleOptions,
-} from '../repository/article.repository';
+import { ArticleRepository } from '../repository/article.repository';
 
 @Injectable()
 export class ArticleService {
@@ -28,8 +25,7 @@ export class ArticleService {
         const user = await this.userService.getById(userId);
         if (!user) throw new NotFoundException('User not found');
 
-        const options: GetArticleOptions = { userId: userId };
-        const articles = await this.articleRepository.getAll(options);
+        const articles = await this.articleRepository.getByUserId(userId);
 
         return articles;
     }

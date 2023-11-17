@@ -18,15 +18,15 @@ export class StatusRepository {
         return result;
     }
 
-    async getByUserId(userId: string): Promise<Status[]> {
-        const options = { where: { userId } };
-        const result = await this.statusRepository.find(options);
-        return result;
-    }
-
     async getById(id: string): Promise<Status> {
         const options = { where: { id } };
         const result = await this.statusRepository.findOne(options);
+        return result;
+    }
+
+    async getByUserId(userId: string): Promise<Status[]> {
+        const options = { where: { userId } };
+        const result = await this.statusRepository.find(options);
         return result;
     }
 

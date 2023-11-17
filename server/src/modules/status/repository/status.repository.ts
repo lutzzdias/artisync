@@ -25,7 +25,7 @@ export class StatusRepository {
     }
 
     async getByUserId(userId: string): Promise<Status[]> {
-        const options = { where: { userId } };
+        const options = { where: [{ userId }, { userId: null }] };
         const result = await this.statusRepository.find(options);
         return result;
     }

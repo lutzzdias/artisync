@@ -71,7 +71,6 @@ export class AuthService {
         registerDto.password = await this.argonHelper.hash(
             registerDto.password,
         );
-        // TODO: Validate registerDto data and throw 400 if invalid
         const user: User = { ...registerDto };
         const result = await this.userService.create(user);
         if (!result) throw InternalServerErrorException;

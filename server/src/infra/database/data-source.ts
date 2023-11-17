@@ -8,7 +8,7 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
     username: process.env.DB_USER || 'admin',
     password: process.env.DB_PASSWORD || 'admin',
     database: process.env.DB_NAME || 'artisync-db',
-    entities: ['dist/**/*.schema.{js,ts}'], // TODO: check why __dirname does not work here
+    entities: ['dist/**/*.schema.{js,ts}'],
     migrations: [`${__dirname}/**/migration/**/*.{js,ts}`],
     seeds: [`${__dirname}/**/seed/**/*.{js,ts}`],
     factories: [`${__dirname}/**/factory/**/*.{js,ts}`],

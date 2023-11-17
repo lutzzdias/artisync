@@ -31,7 +31,7 @@ tag/small-summary/issue-id
 The PR title should adhere to this pattern:
 
 ```
-#X - <description or issue title>
+X - <description or issue title>
 ```
 
 Where "X" is the issue number. Include a link to the related issue in the PR description, possibly with the `closes` keyword for automatic issue closure upon PR merge.

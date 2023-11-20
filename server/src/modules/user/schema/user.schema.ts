@@ -37,6 +37,10 @@ export const UserSchema = new EntitySchema<User>({
             length: 510,
             nullable: true,
         },
+        updatedUsernameAt: {
+            type: Date,
+            nullable: true,
+        },
         createdAt: {
             type: Date,
             createDate: true,

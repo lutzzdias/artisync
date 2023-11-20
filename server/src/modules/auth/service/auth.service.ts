@@ -45,7 +45,10 @@ export class AuthService {
         };
     }
 
-    async authenticateUser(username: string, password: string): Promise<any> {
+    async authenticateUserWithUsername(
+        username: string,
+        password: string,
+    ): Promise<any> {
         const user = await this.userService.getByUsername(username);
         if (
             user &&
@@ -58,11 +61,31 @@ export class AuthService {
         return null;
     }
 
+    async authenticateUserWithEmail(email: string, password: string) {
+        const user = await this.userService.getByEmail(email);
+        if (
+            user &&
+            (await this.argonHelper.isHashValid(user.password, password))
+        ) {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { password, ...result } = user;
+            return result;
+        }
+        return null;
+    }
+
     async signin(signInDto: SignInDto): Promise<Tokens> {
-        const user = await this.authenticateUser(
-            signInDto.username,
-            signInDto.password,
-        );
+        let user;
+        if (signInDto.username)
+            user = await this.authenticateUserWithUsername(
+                signInDto.username,
+                signInDto.password,
+            );
+        else
+            user = await this.authenticateUserWithEmail(
+                signInDto.email,
+                signInDto.password,
+            );
 
         if (!user) throw new ForbiddenException('Invalid credentials');
 

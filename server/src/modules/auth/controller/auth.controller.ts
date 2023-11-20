@@ -8,6 +8,7 @@ import {
     Request,
     UseGuards,
 } from '@nestjs/common';
+import { SignInPipe } from 'src/common/pipe/sign-in.pipe';
 import { Public } from '../../../common/guard/public.guard';
 import { RefreshTokenGuard } from '../../../common/guard/refresh.guard';
 import { Tokens } from '../../../common/type/tokens.type';
@@ -25,7 +26,9 @@ export class AuthController {
     @Public()
     @Post('sign-in')
     @HttpCode(HttpStatus.OK)
-    async signin(@Body() signInDto: SignInDto): Promise<Tokens> {
+    async signin(
+        @Body(new SignInPipe()) signInDto: SignInDto,
+    ): Promise<Tokens> {
         return await this.authService.signin(signInDto);
     }
 

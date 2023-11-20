@@ -3,11 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Article } from '../entity/article.entity';
 
-export type GetArticleOptions = {
-    id?: string;
-    userId?: string;
-};
-
 @Injectable()
 export class ArticleRepository {
     constructor(

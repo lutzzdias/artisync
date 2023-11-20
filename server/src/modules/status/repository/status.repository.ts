@@ -9,7 +9,7 @@ export class StatusRepository {
     ) {}
 
     async create(status: Status): Promise<Status> {
-        const result = await this.statusRepository.save(status);
+        const result = await this.statusRepository.create(status);
         return result;
     }
 
@@ -31,8 +31,8 @@ export class StatusRepository {
     }
 
     async update(status: Status): Promise<Status> {
-        // TODO: Stop using save and use update instead
-        const result = await this.statusRepository.save(status);
+        const result = (await this.statusRepository.update(status.id, status))
+            .raw[0];
         return result;
     }
 

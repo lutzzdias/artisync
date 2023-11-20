@@ -128,8 +128,11 @@ export class AuthService {
         await this.authRepository.create(resetPassword);
     }
 
-    async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
-        const { email, token, password } = resetPasswordDto;
+    async resetPassword(
+        token: string,
+        resetPasswordDto: ResetPasswordDto,
+    ): Promise<void> {
+        const { email, password } = resetPasswordDto;
 
         const user = await this.userService.getByEmail(email);
         if (!user) throw new NotFoundException('User not found'); // Validate user

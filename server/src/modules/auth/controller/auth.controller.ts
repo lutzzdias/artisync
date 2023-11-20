@@ -3,6 +3,7 @@ import {
     Controller,
     HttpCode,
     HttpStatus,
+    Param,
     Post,
     Request,
     UseGuards,
@@ -47,9 +48,12 @@ export class AuthController {
     }
 
     @Public()
-    @Post('reset-password')
-    async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
-        return await this.authService.resetPassword(resetPasswordDto);
+    @Post('reset-password/:token')
+    async resetPassword(
+        @Param('token') token,
+        @Body() resetPasswordDto: ResetPasswordDto,
+    ) {
+        return await this.authService.resetPassword(token, resetPasswordDto);
     }
 
     // TODO: Not use @Request

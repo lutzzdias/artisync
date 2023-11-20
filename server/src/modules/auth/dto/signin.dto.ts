@@ -1,16 +1,13 @@
-// TODO: Add nest decorators
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-import { IsNotEmpty, IsString } from 'class-validator';
-
-// TODO: Add sign in with email
 export class SignInDto {
+    @IsOptional()
     @IsString()
-    @IsNotEmpty()
     username?: string;
 
-    // @IsEmail()
-    // @IsNotEmpty()
-    // email?: string;
+    @IsOptional()
+    @IsEmail()
+    email?: string;
 
     @IsString()
     @IsNotEmpty()

@@ -6,6 +6,7 @@ export class User {
     bio?: string;
     image?: string;
     refreshToken?: string;
+    updatedUsernameAt?: Date;
     createdAt?: Date;
     updatedAt?: Date;
 }

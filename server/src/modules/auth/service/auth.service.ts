@@ -28,9 +28,7 @@ export class AuthService {
 
     async updateRefreshToken(userId: string, refreshToken: string) {
         const hashedRefreshToken = await this.argonHelper.hash(refreshToken);
-        await this.userService.update(userId, {
-            refreshToken: hashedRefreshToken,
-        });
+        await this.userService.refreshToken(userId, hashedRefreshToken);
     }
 
     generateTokens(userId: string): Tokens {
@@ -101,7 +99,7 @@ export class AuthService {
 
         const hashedNewPassword = await this.argonHelper.hash(newPassword);
 
-        await this.userService.update(user.id, { password: hashedNewPassword });
+        await this.userService.changePassword(user.id, hashedNewPassword);
     }
 
     async forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<void> {
@@ -158,14 +156,13 @@ export class AuthService {
         await this.authRepository.invalidate(instance);
 
         const hashedPassword = await this.argonHelper.hash(password);
-        await this.userService.update(user.id, { password: hashedPassword });
+        await this.userService.changePassword(user.id, hashedPassword);
 
         await this.logout(user.id);
     }
 
     async logout(userId: string) {
-        // TODO: Add refreshtoken should not be null in order to logout
-        await this.userService.update(userId, { refreshToken: null });
+        await this.userService.refreshToken(userId, null);
     }
 
     async refresh(userId: string, refreshToken: string) {

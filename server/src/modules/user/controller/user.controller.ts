@@ -7,6 +7,7 @@ import {
     Patch,
     Query,
 } from '@nestjs/common';
+import { ChangeUsernameDto } from '../dto/change-username.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UserService } from '../service/user.service';
 
@@ -20,7 +21,6 @@ export class UserController {
         return result;
     }
 
-    // TODO: See if there should exist a get all here
     @Get()
     async getByTextData(
         @Query('username') username: string,
@@ -33,7 +33,6 @@ export class UserController {
         return result;
     }
 
-    // TODO: Do not allow to update username, email and password by this endpoint
     @Patch(':id')
     async update(
         @Param('id') id: string,
@@ -41,6 +40,16 @@ export class UserController {
     ) {
         // TODO: Convert from UpdateUserDto to User
         const result = await this.userService.update(id, updateUserDto);
+        return result;
+    }
+
+    @Patch('change-username/:id')
+    async changeUsername(
+        @Param('id') id: string,
+        @Body() changeUsernameDto: ChangeUsernameDto,
+    ) {
+        const username = changeUsernameDto.username;
+        const result = await this.userService.changeUsername(id, username);
         return result;
     }
 

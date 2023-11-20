@@ -11,7 +11,7 @@ export class UserRepository {
     ) {}
 
     async create(user: User): Promise<User> {
-        await this.userRepository.save(user);
+        await this.userRepository.create(user);
         return user;
     }
 
@@ -38,8 +38,7 @@ export class UserRepository {
     }
 
     async update(user: User): Promise<User> {
-        // TODO: Stop using save and use update instead
-        user = await this.userRepository.save(user);
+        user = (await this.userRepository.update(user.id, user)).raw[0];
         return user;
     }
 

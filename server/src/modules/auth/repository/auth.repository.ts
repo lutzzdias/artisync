@@ -11,7 +11,7 @@ export class AuthRepository {
     ) {}
 
     async create(passwordReset: ResetPassword): Promise<ResetPassword> {
-        const result = await this.passwordResetRepository.save(passwordReset);
+        const result = await this.passwordResetRepository.create(passwordReset);
         return result;
     }
 
@@ -39,8 +39,9 @@ export class AuthRepository {
     }
 
     async invalidate(instance: ResetPassword): Promise<ResetPassword> {
-        // TODO: Stop using save and use update instead
-        const result = await this.passwordResetRepository.save(instance);
+        const result = (
+            await this.passwordResetRepository.update(instance.id, instance)
+        ).raw[0];
 
         return result;
     }

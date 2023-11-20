@@ -16,6 +16,17 @@ erDiagram
         date updatedAt
     }
 
+    RESET-PASSWORD {
+        uuid id PK
+        varchar(255) token
+        bool used "default false"
+        date expiresAt
+        date createdAt
+        date updatedAt
+
+        uuid userId FK
+    }
+
     ARTICLE {
         uuid id PK
         varchar(255) title
@@ -65,6 +76,7 @@ erDiagram
     USER 1 to 0+ ARTICLE : ""
     USER 1 to 0+ STATUS : ""
     USER 1 to 0+ PROJECT : ""
+    USER 1 to 0+ RESET-PASSWORD : ""
 
     STATUS 0+ to 1 DELETED-DEFAULT-STATUS : ""
     

@@ -5,9 +5,10 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { ArgonHelper } from 'src/helper/argon.helper';
+import { ArgonHelper } from 'src/common/helper/argon.helper';
 import { User } from 'src/modules/user/entity/user.entity';
 import { UserService } from 'src/modules/user/service/user.service';
+import { Tokens } from '../../../common/type/tokens.type';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import { ForgotPasswordDto } from '../dto/forgot-password.dto';
 import { RegisterDto } from '../dto/register.dto';
@@ -15,7 +16,6 @@ import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { SignInDto } from '../dto/signin.dto';
 import { ResetPassword } from '../entity/reset-password.entity';
 import { AuthRepository } from '../repository/auth.repository';
-import { Tokens } from '../type/tokens.type';
 
 @Injectable()
 export class AuthService {

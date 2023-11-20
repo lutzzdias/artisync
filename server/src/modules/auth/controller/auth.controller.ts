@@ -7,15 +7,15 @@ import {
     Request,
     UseGuards,
 } from '@nestjs/common';
+import { Public } from '../../../common/guard/public.guard';
+import { RefreshTokenGuard } from '../../../common/guard/refresh.guard';
+import { Tokens } from '../../../common/type/tokens.type';
 import { ChangePasswordDto } from '../dto/change-password.dto';
 import { ForgotPasswordDto } from '../dto/forgot-password.dto';
 import { RegisterDto } from '../dto/register.dto';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { SignInDto } from '../dto/signin.dto';
-import { Public } from '../guard/public.guard';
-import { RefreshTokenGuard } from '../guard/refresh.guard';
 import { AuthService } from '../service/auth.service';
-import { Tokens } from '../type/tokens.type';
 
 @Controller('auth')
 export class AuthController {

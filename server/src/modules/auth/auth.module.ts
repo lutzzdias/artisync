@@ -5,16 +5,13 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ArgonHelper } from 'src/helper/argon.helper';
+import { CommonModule } from 'src/common/common.module';
+import { JwtAuthGuard } from '../../common/guard/jwt-auth.guard';
 import { UserModule } from '../user/user.module';
 import { AuthController } from './controller/auth.controller';
-import { JwtAuthGuard } from './guard/jwt-auth.guard';
 import { AuthRepository } from './repository/auth.repository';
 import { ResetPasswordSchema } from './schema/reset-password.schema';
 import { AuthService } from './service/auth.service';
-import { AccessTokenStrategy } from './strategy/access-token.strategy';
-import { LocalStrategy } from './strategy/local.strategy';
-import { RefreshTokenStrategy } from './strategy/refresh-token.strategy';
 
 @Module({
     imports: [
@@ -23,20 +20,17 @@ import { RefreshTokenStrategy } from './strategy/refresh-token.strategy';
         UserModule,
         PassportModule,
         JwtModule,
+        CommonModule,
     ],
     controllers: [AuthController],
     providers: [
         AuthService,
         AuthRepository,
-        LocalStrategy,
-        AccessTokenStrategy,
-        RefreshTokenStrategy,
-        ArgonHelper,
         {
             provide: APP_GUARD,
             useClass: JwtAuthGuard,
         },
     ],
-    exports: [AuthService, ArgonHelper],
+    exports: [AuthService],
 })
 export class AuthModule {}

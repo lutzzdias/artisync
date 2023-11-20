@@ -18,7 +18,6 @@ export class StatusService {
     ) {}
 
     async create(status: Status) {
-        // TODO: Do not allow same name for same user
         const userStatuses = await this.statusRepository.getByUserId(
             status.userId,
         );

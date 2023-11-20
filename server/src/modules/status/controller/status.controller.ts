@@ -9,6 +9,7 @@ import {
     Query,
 } from '@nestjs/common';
 import { CreateStatusDto } from '../dto/create-status.dto';
+import { DeleteStatusDto } from '../dto/delete-status.dto';
 import { UpdateStatusDto } from '../dto/update-status.dto';
 import { Status } from '../entity/status.entity';
 import { StatusService } from '../service/status.service';
@@ -51,8 +52,11 @@ export class StatusController {
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: string) {
-        const result = await this.statusService.delete(id);
+    async delete(
+        @Param('id') id: string,
+        @Body() deleteStatusDto: DeleteStatusDto,
+    ) {
+        const result = await this.statusService.delete(id, deleteStatusDto);
         return result;
     }
 }

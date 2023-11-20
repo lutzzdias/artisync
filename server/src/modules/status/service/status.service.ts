@@ -1,4 +1,5 @@
 import {
+    ConflictException,
     ForbiddenException,
     Injectable,
     NotFoundException,
@@ -17,7 +18,15 @@ export class StatusService {
     ) {}
 
     async create(status: Status) {
-        // TODO: Do not allow same name for same user
+        const userStatuses = await this.statusRepository.getByUserId(
+            status.userId,
+        );
+        const isDuplicate = userStatuses.find(
+            (userStatus) => userStatus.name === status.name,
+        );
+        if (isDuplicate)
+            throw new ConflictException('Status name already exists');
+
         const result = await this.statusRepository.create(status);
         return result;
     }

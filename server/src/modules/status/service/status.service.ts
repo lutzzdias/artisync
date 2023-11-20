@@ -1,5 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    ForbiddenException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { UserService } from 'src/modules/user/service/user.service';
+import { DeleteStatusDto } from '../dto/delete-status.dto';
 import { UpdateStatusDto } from '../dto/update-status.dto';
 import { Status } from '../entity/status.entity';
 import { StatusRepository } from '../repository/status.repository';
@@ -39,9 +44,13 @@ export class StatusService {
     async update(id: string, updateStatusDto: UpdateStatusDto) {
         const status = await this.statusRepository.getById(id);
         if (!status) throw new NotFoundException('Status not found');
-
-        // TODO: Only allow user to edit their own statuses
-        // TODO: Do not allow user to edit default statuses
+        console.log(status.userId, updateStatusDto.userId);
+        if (!status.userId)
+            new ForbiddenException('Cannot edit default status');
+        if (status.userId !== updateStatusDto.userId)
+            throw new ForbiddenException(
+                'You cannot edit statuses created by other users.',
+            );
 
         const { ...updatedStatusData } = updateStatusDto;
         const updatedStatus: Status = {
@@ -57,13 +66,19 @@ export class StatusService {
         return result;
     }
 
-    async delete(id: string) {
+    async delete(id: string, deleteStatusDto: DeleteStatusDto) {
         const status = await this.statusRepository.getById(id);
         if (!status) throw new NotFoundException('Status not found');
 
-        // TODO: Only allow user to delete their own statuses
-        // TODO: Implement default state 'deletion' logic
+        if (status.userId != null && status.userId !== deleteStatusDto.userId)
+            throw new ForbiddenException(
+                'You cannot delete statuses created by other users.',
+            );
 
+        if (!status.userId) {
+            // TODO: Implement default status deletion logic
+            throw new ForbiddenException('You cannot delete default statuses.');
+        }
         const result = await this.statusRepository.delete(id);
         return result;
     }

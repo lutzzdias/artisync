@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { X } from 'lucide-react'
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface ArticleModalProps {
-  showModal: any
+  showModal: any;
 }
 
 export function ArticleModal({ showModal }: ArticleModalProps) {
-  const closeModal = () => showModal(false)
+  const closeModal = () => showModal(false);
 
   const createArticle = () => {
-    console.log('click')
-  }
+    console.log("click");
+  };
 
   return (
     <>
@@ -27,7 +27,7 @@ export function ArticleModal({ showModal }: ArticleModalProps) {
                 <div className="flex w-full items-center justify-between">
                   <div className="text-4xl font-bold">Title</div>
                   <button onClick={closeModal}>
-                    <X size={24} />
+                    <XMarkIcon />
                   </button>
                 </div>
                 <div className="text-sm">Author</div>
@@ -47,5 +47,5 @@ export function ArticleModal({ showModal }: ArticleModalProps) {
         </>
       ) : null}
     </>
-  )
+  );
 }

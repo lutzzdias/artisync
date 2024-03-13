@@ -1,7 +1,7 @@
-import logo from '@/assets/logo.svg'
-import { Search } from 'lucide-react'
-import Image from 'next/image'
-import { ArticleButton } from './ArticleButton'
+import logo from "@/logo.svg";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import { ArticleButton } from "./ArticleButton";
 
 export function NavBar() {
   return (
@@ -19,7 +19,7 @@ export function NavBar() {
           <section role="search">
             <form action="#" method="get" className="w-80">
               <div className="flex items-center gap-2 rounded-full border border-solid border-gray-300 px-4">
-                <Search className="text-gray-300" size={24} />
+                <MagnifyingGlassIcon className="text-gray-300" />
                 <input
                   className="w-full bg-transparent py-3 focus:outline-none"
                   type="search"
@@ -34,5 +34,5 @@ export function NavBar() {
         </div>
       </header>
     </>
-  )
+  );
 }

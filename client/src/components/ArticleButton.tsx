@@ -15,7 +15,7 @@ export function ArticleButton() {
         className="flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3 text-white-500"
         onClick={openCreationModal}
       >
-        <PlusIcon />
+        <PlusIcon className="h-6 w-6" />
         Create article
       </button>
       {showModal ? <ArticleModal showModal={setShowModal} /> : null}

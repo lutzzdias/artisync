@@ -27,7 +27,7 @@ export function ArticleModal({ showModal }: ArticleModalProps) {
                 <div className="flex w-full items-center justify-between">
                   <div className="text-4xl font-bold">Title</div>
                   <button onClick={closeModal}>
-                    <XMarkIcon />
+                    <XMarkIcon className="h-6 w-6" />
                   </button>
                 </div>
                 <div className="text-sm">Author</div>

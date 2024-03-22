@@ -1,24 +1,24 @@
 version: '3.7'
 
 networks:
-  artisync-network:
-    driver: bridge
+    artisync-network:
+        driver: bridge
 
 services:
-  db:
-    image: postgres
-    container_name: artisync-db
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    ports:
-      - ${DB_PORT}:${DB_PORT}
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    networks:
-      - artisync-network
+    db:
+        image: postgres
+        container_name: artisync-db
+        restart: always
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+        ports:
+            - ${DB_PORT}:${DB_PORT}
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        networks:
+            - artisync-network
 
 volumes:
-  db-data:
+    db-data:

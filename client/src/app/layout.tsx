@@ -3,7 +3,6 @@ import React from "react";
 import "../globals.css";
 
 import { NavBar } from "@/components/NavBar";
-import Script from "next/script";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -28,17 +27,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Example</title>
-        <Script src="https://cdn.tailwindcss.com" />
-      </head>
       <body
         className={`${inter.className} ${montserrat.className} bg-white-500 px-20 py-6`}
       >
-        <NavBar />
-        {children}
+        <div id="root">
+          <NavBar />
+          {children}
+        </div>
       </body>
     </html>
   );

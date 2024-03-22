@@ -2,23 +2,40 @@
 
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { ArticleModal } from "./ArticleModal";
+import { Modal } from "./Modal";
 
 export function ArticleButton() {
-  const [showModal, setShowModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const openCreationModal = () => setShowModal(true);
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function handleSaveArticle() {
+    console.log("article saved");
+    closeModal();
+  }
 
   return (
     <>
       <button
-        className="flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3 text-white-500"
-        onClick={openCreationModal}
+        className="text-white-500 flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3"
+        onClick={openModal}
       >
         <PlusIcon className="h-6 w-6" />
         Create article
       </button>
-      {showModal ? <ArticleModal showModal={setShowModal} /> : null}
+      {isOpen ? (
+        <Modal
+          isOpen={isOpen}
+          handleClose={closeModal}
+          handleSave={handleSaveArticle}
+        />
+      ) : null}
     </>
   );
 }

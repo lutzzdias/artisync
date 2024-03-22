@@ -2,8 +2,6 @@ import { Inter, Montserrat } from "next/font/google";
 import React from "react";
 import "../globals.css";
 
-import { NavBar } from "@/components/NavBar";
-
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
@@ -30,10 +28,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} ${montserrat.className} bg-white-500 px-20 py-6`}
       >
-        <div id="root">
-          <NavBar />
-          {children}
-        </div>
+        <div id="root">{children}</div>
       </body>
     </html>
   );

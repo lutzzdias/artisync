@@ -1,9 +1,29 @@
-import logo from '@/assets/logo.svg'
-import { Search } from 'lucide-react'
-import Image from 'next/image'
-import { ArticleButton } from './ArticleButton'
+"use client";
+
+import logo from "@/assets/logo.svg";
+import { Modal } from "@/components/Modal";
+import { FilledButton } from "@/components/buttons/FilledButton";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+import { useState } from "react";
+import { Search } from "./Search";
 
 export function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsOpen(false);
+  }
+
+  function handleSaveArticle() {
+    console.log("article saved");
+    handleCloseModal();
+  }
+
   return (
     <>
       <header className="mb-6 flex flex-row items-center justify-between">
@@ -15,24 +35,23 @@ export function NavBar() {
 
         {/* actions */}
         <div className="flex flex-row gap-4">
-          {/* search area */}
-          <section role="search">
-            <form action="#" method="get" className="w-80">
-              <div className="flex items-center gap-2 rounded-full border border-solid border-gray-300 px-4">
-                <Search className="text-gray-300" size={24} />
-                <input
-                  className="w-full bg-transparent py-3 focus:outline-none"
-                  type="search"
-                  placeholder="Search by author or title"
-                  maxLength={200}
-                />
-              </div>
-            </form>
-          </section>
-          {/* create article button */}
-          <ArticleButton />
+          <Search />
+          <FilledButton
+            onClick={openModal}
+            prefixIcon={<PlusIcon className="h-6 w-6" />}
+          >
+            Create article
+          </FilledButton>
         </div>
       </header>
+
+      {isOpen && (
+        <Modal
+          isOpen={isOpen}
+          handleClose={handleCloseModal}
+          handleSave={handleSaveArticle}
+        />
+      )}
     </>
-  )
+  );
 }

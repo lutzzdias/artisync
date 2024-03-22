@@ -1,11 +1,7 @@
 type TitleProps = {
-    str: string;
-}
+  str: string;
+};
 
 export function Title({ str }: TitleProps) {
-    return (
-        <h1>{str}</h1>
-    )
+  return <h1>{str}</h1>;
 }
-
-

@@ -23,7 +23,7 @@ export function ArticleButton() {
   return (
     <>
       <button
-        className="text-white-500 flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3"
+        className="flex flex-row items-center justify-center gap-2 rounded-xl bg-purple-500 px-4 py-3 text-white"
         onClick={openModal}
       >
         <PlusIcon className="h-6 w-6" />

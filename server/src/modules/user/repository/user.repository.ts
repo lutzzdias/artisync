@@ -11,7 +11,7 @@ export class UserRepository {
     ) {}
 
     async create(user: User): Promise<User> {
-        await this.userRepository.create(user);
+        await this.userRepository.save(user);
         return user;
     }
 
@@ -38,7 +38,7 @@ export class UserRepository {
     }
 
     async update(user: User): Promise<User> {
-        user = (await this.userRepository.update(user.id, user)).raw[0];
+        await this.userRepository.update(user.id, user);
         return user;
     }
 

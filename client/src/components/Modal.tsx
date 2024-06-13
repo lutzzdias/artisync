@@ -8,7 +8,7 @@ export function Modal({
 }: {
   isOpen: boolean;
   handleClose: () => void;
-  handleSave: () => void;
+  handleSave: () => Promise<void>;
 }) {
   return (
     <Dialog

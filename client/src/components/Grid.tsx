@@ -1,19 +1,35 @@
-import { Card } from '@/components/Card'
+"use client";
+
+import { Card } from "@/components/Card";
+import { Article } from "@/types";
+import { useApi } from "@/utils/api";
+import { useEffect, useState } from "react";
 
 export function Grid() {
+  const api = useApi("/article");
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const result = await api.get();
+      setArticles(result);
+    };
+
+    fetchArticles();
+  }, []);
+
   return (
     <div className="grid grid-cols-4 gap-8">
-      {Array.from({ length: 8 }).map((_, index) => (
+      {articles.map((article) => (
         <Card
-          key={index}
+          key={article.id}
           article={{
-            title: 'Lorem ipsum',
-            description:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl vitae tincidunt ultricies, nunc sapien ultricies nunc, vitae ultricies nisl nunc eget nisl. Donec auctor, nisl vitae tincidunt ultricies, nunc sapien ultricies nunc, vitae ultricies nisl nunc eget nisl.',
-            author: 'John Doe',
+            title: article.title,
+            description: article.description,
+            author: article.author,
           }}
         />
       ))}
     </div>
-  )
+  );
 }

@@ -9,7 +9,7 @@ export class StatusRepository {
     ) {}
 
     async create(status: Status): Promise<Status> {
-        const result = await this.statusRepository.create(status);
+        const result = await this.statusRepository.save(status);
         return result;
     }
 
@@ -31,9 +31,8 @@ export class StatusRepository {
     }
 
     async update(status: Status): Promise<Status> {
-        const result = (await this.statusRepository.update(status.id, status))
-            .raw[0];
-        return result;
+        await this.statusRepository.update(status.id, status);
+        return status;
     }
 
     async delete(id: string): Promise<void> {

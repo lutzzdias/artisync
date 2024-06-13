@@ -53,10 +53,8 @@ export function NavBar() {
         {/* actions */}
         <div className="flex flex-row gap-4">
           <Search />
-          <FilledButton
-            onClick={openModal}
-            prefixIcon={<PlusIcon className="h-6 w-6" />}
-          >
+          <FilledButton onClick={openModal}>
+            <PlusIcon className="h-6 w-6" />
             Create article
           </FilledButton>
         </div>

@@ -11,7 +11,7 @@ export class ArticleRepository {
     ) {}
 
     async create(article: Article): Promise<Article> {
-        const result = await this.articleRepository.create(article);
+        const result = await this.articleRepository.save(article);
         return result;
     }
 
@@ -33,11 +33,9 @@ export class ArticleRepository {
     }
 
     async update(article: Article): Promise<Article> {
-        const result = (
-            await this.articleRepository.update(article.id, article)
-        ).raw[0];
+        await this.articleRepository.update(article.id, article);
 
-        return result;
+        return article;
     }
 
     async delete(id: string): Promise<void> {

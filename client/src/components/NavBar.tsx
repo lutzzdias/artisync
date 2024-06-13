@@ -7,7 +7,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useState } from "react";
 import { Search } from "./Search";
-import { useApi } from "@/utils/api";
+import { useApi } from "@/hooks";
 import { Article } from "@/types";
 
 export function NavBar() {

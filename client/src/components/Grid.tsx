@@ -1,8 +1,8 @@
 "use client";
 
 import { Card } from "@/components/Card";
+import { useApi } from "@/hooks";
 import { Article } from "@/types";
-import { useApi } from "@/utils/api";
 import { useEffect, useState } from "react";
 
 export function Grid() {

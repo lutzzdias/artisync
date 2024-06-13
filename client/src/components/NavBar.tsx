@@ -7,8 +7,11 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useState } from "react";
 import { Search } from "./Search";
+import { useApi } from "@/utils/api";
+import { Article } from "@/types";
 
 export function NavBar() {
+  const api = useApi("/article");
   const [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -19,8 +22,22 @@ export function NavBar() {
     setIsOpen(false);
   }
 
-  function handleSaveArticle() {
-    console.log("article saved");
+  async function handleSaveArticle() {
+    // TODO: get data from form
+    const article: Article = {
+      title: "test",
+      description: "test",
+      link: "www.test.com",
+      author: "test",
+      userId: "cd761d00-a501-4e6b-8b39-b45cdd202092",
+      statusId: "69b5f24f-ba93-49d9-ad1a-0d848f8099fa",
+    };
+
+    try {
+      await api.post(article);
+    } catch (error) {
+      throw new Error("Failed to save article");
+    }
     handleCloseModal();
   }
 

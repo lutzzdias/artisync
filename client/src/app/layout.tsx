@@ -26,9 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} ${montserrat.className} bg-white-500 px-20 py-6`}
+        className={`${inter.className} ${montserrat.className} bg-white-500 h-screen w-screen px-20 py-6`}
       >
-        <div id="root">{children}</div>
+        {children}
       </body>
     </html>
   );

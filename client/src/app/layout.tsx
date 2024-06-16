@@ -1,5 +1,5 @@
 import { Inter, Montserrat } from "next/font/google";
-import React from "react";
+import { AuthProvider } from "@/contexts/AuthProvider";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -24,12 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} ${montserrat.className} bg-white-500 h-screen w-screen px-20 py-6`}
-      >
-        {children}
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body
+          className={`${inter.className} ${montserrat.className} bg-white-500 h-screen w-screen px-20 py-6`}
+        >
+          {children}
+        </body>
+      </html>
+    </AuthProvider>
   );
 }

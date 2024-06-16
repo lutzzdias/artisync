@@ -5,7 +5,7 @@ type Api = {
   loading: boolean;
   error: Error | null;
   get: (id?: string) => Promise<any>;
-  post: (data: object) => Promise<any>;
+  post: (data: object, path?: string) => Promise<any>;
   patch: (id: string, data: object) => Promise<any>;
   delete: (id: string) => Promise<any>;
 };
@@ -14,7 +14,7 @@ const api = axios.create({
   baseURL: "http://localhost:3333",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZDc2MWQwMC1hNTAxLTRlNmItOGIzOS1iNDVjZGQyMDIwOTIiLCJpYXQiOjE3MTgyNTE2MjMsImV4cCI6MTcxODI1MzQyM30.BsX-RVhal9-VqLIWaYLfZwGThf16ZX1Iwo11WuTqVS8`,
+    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZDc2MWQwMC1hNTAxLTRlNmItOGIzOS1iNDVjZGQyMDIwOTIiLCJpYXQiOjE3MTgzOTMxMDYsImV4cCI6MTcxODM5NDkwNn0.gDqiSMP_DHxFmSYEsZC4byD8z3nNDEWb9GDTrgCLa3U`,
   },
 });
 
@@ -79,7 +79,8 @@ export function useApi(url: string): Api {
     loading,
     error,
     get: (id?: string) => handleRequest(() => get(url, id)),
-    post: (data: object) => handleRequest(() => post(url, data)),
+    post: (data: object, path?: string) =>
+      handleRequest(() => post(url + path, data)),
     patch: (id: string, data: object) =>
       handleRequest(() => patch(url, id, data)),
     delete: (id: string) => handleRequest(() => del(url, id)),

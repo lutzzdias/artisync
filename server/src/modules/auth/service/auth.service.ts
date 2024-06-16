@@ -1,8 +1,10 @@
 import {
+    BadRequestException,
     ForbiddenException,
     Injectable,
     InternalServerErrorException,
     NotFoundException,
+    UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ArgonHelper } from 'src/common/helper/argon.helper';
@@ -87,7 +89,7 @@ export class AuthService {
                 signInDto.password,
             );
 
-        if (!user) throw new ForbiddenException('Invalid credentials');
+        if (!user) throw new UnauthorizedException('Invalid credentials');
 
         const tokens: Tokens = this.generateTokens(user.id);
         await this.updateRefreshToken(user.id, tokens.refreshToken);
@@ -118,7 +120,7 @@ export class AuthService {
             currentPassword,
         );
         if (!isCurrentPasswordValid)
-            throw new ForbiddenException('Invalid credentials');
+            throw new UnauthorizedException('Invalid credentials');
 
         const hashedNewPassword = await this.argonHelper.hash(newPassword);
 
@@ -163,14 +165,15 @@ export class AuthService {
         });
 
         const userId = payload.sub;
-        if (userId !== user.id) throw new ForbiddenException('Access denied');
+        if (userId !== user.id)
+            throw new UnauthorizedException('Access denied');
 
         const instance = await this.authRepository.getByToken(token);
 
         if (!instance) throw new NotFoundException('Token not found');
-        if (instance.used) throw new ForbiddenException('Token already used');
+        if (instance.used) throw new BadRequestException('Token already used');
         if (instance.expiresAt < new Date())
-            throw new ForbiddenException('Token expired');
+            throw new BadRequestException('Token expired');
 
         // update resetPassword instance
         instance.used = true;

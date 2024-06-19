@@ -8,17 +8,13 @@ import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { FilledButton } from "@/components/buttons/FilledButton";
 import { useState } from "react";
-import { useApi } from "@/hooks";
+import { signin } from "@/actions/auth";
 
 export default function Login() {
-  const api = useApi("/auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
-    // TODO: save tokens (jwt and refresh) and integrate them with axios
-    await api.post({ email, password }, "/sign-in");
-  };
+  const handleSubmit = async () => await signin(email, password);
 
   return (
     <div className="flex h-full flex-1 items-center justify-center gap-8">
@@ -30,7 +26,6 @@ export default function Login() {
           <Image
             src="https://media.istockphoto.com/id/1205354589/vector/scientists-women-or-laboratory-employees-flat-vector-illustration-isolated.jpg?s=612x612&w=0&k=20&c=9U9f4z_SK5wW80z8pmnbFPXu_e-26PCalcXMbTa7gU0%3D"
             alt="scientists doing research"
-            className="object-fill"
             sizes="100%"
             fill
           />

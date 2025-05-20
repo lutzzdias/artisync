@@ -1,0 +1,44 @@
+services:
+  database:
+    image: postgres:latest
+    container_name: artisync-db
+    restart: unless-stopped
+    env_file:
+      - ./back/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  back:
+    container_name: artisync-back
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    command: npm run start:dev
+    volumes:
+      - ./back:/app
+      - /app/node_modules
+    env_file:
+      - ./back/.env
+    depends_on:
+      - database
+    ports:
+      - "3333:3333"
+
+  front:
+    container_name: artisync-front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    env_file:
+      - ./front/.env
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

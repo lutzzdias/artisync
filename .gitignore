@@ -28,10 +28,10 @@
 !**/.vscode/extensions.json
 
 # Client
-/client/.next/
-client/out/
-client/build/
-client/next-env.d.ts
+front/.next/
+front/out/
+front/build/
+front/next-env.d.ts
 
 # Server
-/server/dist/
+back/dist/

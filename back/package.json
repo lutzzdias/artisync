@@ -5,23 +5,6 @@
     "author": "lutzzdias",
     "private": true,
     "license": "UNLICENSED",
-    "jest": {
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "ts"
-        ],
-        "rootDir": "src",
-        "testRegex": ".*\\.spec\\.ts$",
-        "transform": {
-            "^.+\\.(t|j)s$": "ts-jest"
-        },
-        "collectCoverageFrom": [
-            "**/*.(t|j)s"
-        ],
-        "coverageDirectory": "../coverage",
-        "testEnvironment": "node"
-    },
     "scripts": {
         "build": "nest build",
         "start": "nest start",
@@ -42,6 +25,23 @@
         "db:drop": "npm run build && npx typeorm-extension --initialDatabase=postgres -d dist/infra/database/data-source.js db:drop",
         "db:create": "npm run build && npx typeorm-extension --initialDatabase=postgres -d dist/infra/database/data-source.js db:create",
         "db:reset": "npm run db:drop && npm run db:create && npm run migration:run && npm run db:seed"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node"
     },
     "dependencies": {
         "@nestjs/common": "^10.0.0",

@@ -40,7 +40,7 @@ The name of the migration should be lower case and use dashes to separate words.
 Verbs should be in the imperative form.
 
 ```bash
-pnpm typeorm:migration:create ./src/infra/database/migrations/{name-of-migration}
+npm run typeorm:migration:create ./src/infra/database/migrations/{name-of-migration}
 ```
 
 ### Reverting Migrations
@@ -51,7 +51,7 @@ migration, but it will not delete the migration file itself. This allows the
 developer to fix whatever was wrong with the migration.
 
 ```bash
-pnpm run typeorm:migration:revert
+npm run typeorm:migration:revert
 ```
 
 ## Structure

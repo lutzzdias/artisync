@@ -1,77 +1,37 @@
-## Client
+# Common
+**/node_modules/
+**/.DS_Store
+**/*.log
+**/*-debug.log*
+**/coverage/
+**/.env*.local
+**/.env
+**/*.tsbuildinfo
+**/.vercel/
+**/.nyc_output/
+**/.yarn/
+**/.pnp*
+**/*.pem
+**/logs/
 
-# dependencies
-client/node_modules
-client/.pnp
-client.pnp.js
+**/.idea/
+**/.project
+**/.classpath
+**/.c9/
+**/*.launch
+**/.settings/
+**/*.sublime-workspace
+**/.vscode/*
+!**/.vscode/settings.json
+!**/.vscode/tasks.json
+!**/.vscode/launch.json
+!**/.vscode/extensions.json
 
-# testing
-client/coverage
-
-# next.js
-client/.next/
+# Client
+/client/.next/
 client/out/
-
-# production
-client/build
-
-# misc
-client/.DS_Store
-client/*.pem
-
-# debug
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
-
-# local env files
-client/.env*.local
-
-# vercel
-client/.vercel
-
-# typescript
-client/*.tsbuildinfo
+client/build/
 client/next-env.d.ts
 
-
-## Server
-
-# .env
-server/.env
-
-# compiled output
-server/dist
-server/node_modules
-
-# Logs
-server/logs
-server/*.log
-server/npm-debug.log*
-server/pnpm-debug.log*
-server/yarn-debug.log*
-server/yarn-error.log*
-server/lerna-debug.log*
-
-# OS
-server/.DS_Store
-
-# Tests
-server/coverage
-server/.nyc_output
-
-# IDEs and editors
-server/.idea
-server/.project
-server/.classpath
-server/.c9/
-server/*.launch
-server/.settings/
-server/*.sublime-workspace
-
-# IDE - VSCode
-server/.vscode/*
-server/!.vscode/settings.json
-server/!.vscode/tasks.json
-server/!.vscode/launch.json
-server/!.vscode/extensions.json
+# Server
+/server/dist/

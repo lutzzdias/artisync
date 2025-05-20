@@ -7,7 +7,7 @@ export const dataSourceOptions: DataSourceOptions & SeederOptions = {
     port: parseInt(process.env.POSTGRES_PORT || '5432', 10),
     username: process.env.POSTGRES_USER || 'admin',
     password: process.env.POSGRES_PASSWORD || 'admin',
-    database: process.env.POSTGRES_DB || 'artisync-db',
+    database: process.env.POSTGRES_DB || 'artisync',
     entities: ['dist/**/*.schema.{js,ts}'],
     migrations: [`${__dirname}/**/migration/**/*.{js,ts}`],
     seeds: [`${__dirname}/**/seed/**/*.{js,ts}`],
